@@ -4,7 +4,7 @@ import { MenuComponent } from 'src/app/menu/menu.component';
 import { LoginComponent } from 'src/app/login/login.component'
 const routes: Routes = [
   { path: 'menu', component: MenuComponent },
-  { path: 'login', component: LoginComponent }
+  { path: '', component: LoginComponent }
 ];
 
 @NgModule({

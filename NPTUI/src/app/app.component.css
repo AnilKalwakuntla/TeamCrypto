@@ -1,14 +1,1 @@
-.toolbar {
-  height: 50px;
-  display: flex;
-  align-items: center;
-  background-color: #d71e2b;
-  color: white;
-  font-weight: 600;
-  border-bottom: 1px solid #ffcd41;
-}
-
-.spacer {
-  flex: 1;
-}
 

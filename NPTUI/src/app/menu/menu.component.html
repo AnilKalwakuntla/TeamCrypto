@@ -30,42 +30,27 @@
   </symbol>
 </svg>
 
-
 <div class="container-fluid">
+  
   <div class="row flex-nowrap">
     <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0 bg-dark">
       <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
         <ul class="nav nav-pills flex-column mb-sm-auto mb-0 align-items-center align-items-sm-start" id="menu">
           <li class="nav-item">
-            <a class="nav-link align-middle px-0" style="color:white;cursor: pointer;" (click)="menuclick(1)" >
+            <a class="nav-link align-middle px-0" style="color:white;cursor: pointer;" (click)="menuclick(1)">
               <i class="fs-4 bi bi-mic"></i><span class="ms-1 d-none d-sm-inline">My Pronunciation</span>
-            </a>
-          </li>
-
-          <li>
-            <a class="nav-link px-0 align-middle" style="color:white;cursor: pointer;"(click)="menuclick(2)">
-              <i class="fs-4 bi bi-people"></i> <span class="ms-1 d-none d-sm-inline">My Team</span>
             </a>
           </li>
           <li>
             <a class="nav-link px-0 align-middle" style="color:white;cursor: pointer;" (click)="menuclick(3)">
-              <i class="fs-4 bi bi-search"></i> <span class="ms-1 d-none d-sm-inline">Search</span></a>
+              <i class="fs-5 bi bi-search"></i> <span class="ms-1 d-none d-sm-inline">Look Up</span></a>
           </li>
           <li>
-            <br />
-            <div class="dropdown pb-1">
-              <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
-                id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-                <svg class="bi d-block mx-auto mb-1" width="24" height="24">
-                  <use xlink:href="#people-circle" />
-                </svg>
-                <span class="d-none d-sm-inline mx-1">Karthick </span>
-              </a>
-              <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-                <li><a class="dropdown-item" href="#">Sign out</a></li>
-              </ul>
-            </div>
+            <a class="nav-link px-0 align-middle" style="color:white;cursor: pointer;" (click)="menuclick(2)">
+              <i class="fs-4 bi bi-people"></i> <span class="ms-1 d-none d-sm-inline">My Favourites</span>
+            </a>
           </li>
+          
         </ul>
       </div>
     </div>
@@ -74,7 +59,7 @@
         <app-mypronunciation></app-mypronunciation>
       </ng-container>
       <ng-container *ngIf="showMyTeam">
-       <app-myteam></app-myteam>
+        <app-myteam></app-myteam>
       </ng-container>
       <ng-container *ngIf="showSearch">
         <app-search></app-search>

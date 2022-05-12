@@ -236,6 +236,26 @@
         "runtime": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
         }
+      },
+      "NPT.Model/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/NPT.Model.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/NPT.Model.dll": {}
+        }
+      },
+      "NPT.Operation/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v3.1",
+        "compile": {
+          "bin/placeholder/NPT.Operation.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/NPT.Operation.dll": {}
+        }
       }
     }
   },
@@ -549,11 +569,23 @@
         "newtonsoft.json.12.0.2.nupkg.sha512",
         "newtonsoft.json.nuspec"
       ]
+    },
+    "NPT.Model/1.0.0": {
+      "type": "project",
+      "path": "../NPT.Model/NPT.Model.csproj",
+      "msbuildProject": "../NPT.Model/NPT.Model.csproj"
+    },
+    "NPT.Operation/1.0.0": {
+      "type": "project",
+      "path": "../NPT.Operation/NPT.Operation.csproj",
+      "msbuildProject": "../NPT.Operation/NPT.Operation.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v3.1": [
-      "Microsoft.AspNetCore.SpaServices.Extensions >= 3.1.23"
+      "Microsoft.AspNetCore.SpaServices.Extensions >= 3.1.23",
+      "NPT.Model >= 1.0.0",
+      "NPT.Operation >= 1.0.0"
     ]
   },
   "packageFolders": {
@@ -562,11 +594,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\Source\\Repos\\TeamCrypto\\NPT\\NPT\\NPT.csproj",
+      "projectUniqueName": "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT\\NPT.csproj",
       "projectName": "NPT",
-      "projectPath": "C:\\Users\\user\\Source\\Repos\\TeamCrypto\\NPT\\NPT\\NPT.csproj",
+      "projectPath": "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT\\NPT.csproj",
       "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\Source\\Repos\\TeamCrypto\\NPT\\NPT\\obj\\",
+      "outputPath": "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -581,7 +613,14 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT.Model\\NPT.Model.csproj": {
+              "projectPath": "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT.Model\\NPT.Model.csproj"
+            },
+            "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT.Operation\\NPT.Operation.csproj": {
+              "projectPath": "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT.Operation\\NPT.Operation.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

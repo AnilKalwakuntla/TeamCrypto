@@ -9,18 +9,11 @@ namespace NPT.Controllers
 {
     
     [ApiController]
-    public class NamePronunicationController : ControllerBase
+    public class PronunicationController : ControllerBase
     {
     }
 
-    [Route("api/login/authenticateuser/v1")]
-    [HttpPost]
-    public  async Task<ActionResult> LoginUser()
-    {
-        //return OkResult("true");
-        var result = true;
-        return result;
-    }
+    
 
     [Route("api/pronunciation/authenticateuser/v1")]
     [HttpPost]

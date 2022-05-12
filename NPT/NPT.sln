@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NPT", "NPT\NPT.csproj", "{4
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPT.Model", "NPT.Model\NPT.Model.csproj", "{AC6321C7-0E52-46D1-BF77-A17AB73DA81B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NPT.Operation", "NPT.Operation\NPT.Operation.csproj", "{0FB2B6D1-274B-4FCF-B75E-93987AE243E6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{AC6321C7-0E52-46D1-BF77-A17AB73DA81B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC6321C7-0E52-46D1-BF77-A17AB73DA81B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC6321C7-0E52-46D1-BF77-A17AB73DA81B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0FB2B6D1-274B-4FCF-B75E-93987AE243E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0FB2B6D1-274B-4FCF-B75E-93987AE243E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0FB2B6D1-274B-4FCF-B75E-93987AE243E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0FB2B6D1-274B-4FCF-B75E-93987AE243E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

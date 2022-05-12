@@ -23,6 +23,7 @@
     "@angular/router": "~8.2.14",
     "@nguniversal/module-map-ngfactory-loader": "~8.2.6",
     "bootstrap": "^4.6.1",
+    "bootstrap-icons": "^1.8.1",
     "core-js": "^3.20.2",
     "jquery": "^3.6.0",
     "oidc-client": "~1.11.5",

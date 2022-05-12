@@ -12,6 +12,8 @@ export class Pronunciationservice {
     GetStandardPronunciation(name:string) {
         
          this.url= this.url + 'api/pronunciation/GetStandardPronunciation/v1'
+         console.log(this.url);
+         console.log(name);
         return this.httpClient.post(this.url,name);
     }
 }

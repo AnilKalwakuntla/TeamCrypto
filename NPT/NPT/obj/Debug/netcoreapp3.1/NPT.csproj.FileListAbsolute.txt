@@ -103,3 +103,7 @@ C:\Users\user\Source\Repos\TeamCrypto\NPT\NPT\obj\Debug\netcoreapp3.1\NPT.csproj
 C:\Users\user\Source\Repos\TeamCrypto\NPT\NPT\obj\Debug\netcoreapp3.1\NPT.dll
 C:\Users\user\Source\Repos\TeamCrypto\NPT\NPT\obj\Debug\netcoreapp3.1\NPT.pdb
 C:\Users\user\Source\Repos\TeamCrypto\NPT\NPT\obj\Debug\netcoreapp3.1\NPT.genruntimeconfig.cache
+C:\Users\user\source\repos\TeamCrypto\NPT\NPT\bin\Debug\netcoreapp3.1\NPT.Model.dll
+C:\Users\user\source\repos\TeamCrypto\NPT\NPT\bin\Debug\netcoreapp3.1\NPT.Operation.dll
+C:\Users\user\source\repos\TeamCrypto\NPT\NPT\bin\Debug\netcoreapp3.1\NPT.Model.pdb
+C:\Users\user\source\repos\TeamCrypto\NPT\NPT\bin\Debug\netcoreapp3.1\NPT.Operation.pdb

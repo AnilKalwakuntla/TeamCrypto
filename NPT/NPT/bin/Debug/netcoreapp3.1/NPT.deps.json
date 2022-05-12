@@ -32,6 +32,8 @@
       "NPT/1.0.0": {
         "dependencies": {
           "Microsoft.AspNetCore.SpaServices.Extensions": "3.1.23",
+          "NPT.Model": "1.0.0",
+          "NPT.Operation": "1.0.0",
           "Microsoft.AspNetCore.Antiforgery": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Abstractions": "3.1.0.0",
           "Microsoft.AspNetCore.Authentication.Cookies": "3.1.0.0",
@@ -569,6 +571,22 @@
         },
         "compile": {
           "lib/netstandard2.0/Newtonsoft.Json.dll": {}
+        }
+      },
+      "NPT.Model/1.0.0": {
+        "runtime": {
+          "NPT.Model.dll": {}
+        },
+        "compile": {
+          "NPT.Model.dll": {}
+        }
+      },
+      "NPT.Operation/1.0.0": {
+        "runtime": {
+          "NPT.Operation.dll": {}
+        },
+        "compile": {
+          "NPT.Operation.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/3.1.0.0": {
@@ -2313,6 +2331,16 @@
       "sha512": "sha512-rTK0s2EKlfHsQsH6Yx2smvcTCeyoDNgCW7FEYyV01drPlh2T243PR2DiDXqtC5N4GDm4Ma/lkxfW5a/4793vbA==",
       "path": "newtonsoft.json/12.0.2",
       "hashPath": "newtonsoft.json.12.0.2.nupkg.sha512"
+    },
+    "NPT.Model/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "NPT.Operation/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "Microsoft.AspNetCore.Antiforgery/3.1.0.0": {
       "type": "referenceassembly",

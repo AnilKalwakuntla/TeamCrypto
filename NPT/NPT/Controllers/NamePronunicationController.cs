@@ -18,6 +18,8 @@ namespace NPT.Controllers
     public  async Task<ActionResult> LoginUser()
     {
         //return OkResult("true");
+        var result = true;
+        return result;
     }
 
     [Route("api/pronunciation/authenticateuser/v1")]

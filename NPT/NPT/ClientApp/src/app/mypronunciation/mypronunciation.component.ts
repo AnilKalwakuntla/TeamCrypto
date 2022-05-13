@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import * as RecordRTC from 'recordrtc';
 import { DomSanitizer } from '@angular/platform-browser';
-import { Pronunciationservice } from 'src/app/services/pronunciation.service'
+import { Pronunciationservice } from 'src/app/services/pronunciation.service';
+import { standardpronunciationRequestModel } from 'src/app/models/standardpronunciationmodel';
+
 @Component({
   selector: 'app-mypronunciation',
   templateUrl: './mypronunciation.component.html',
@@ -15,16 +17,21 @@ export class MypronunciationComponent implements OnInit {
   public url: any;
   public error: any;
   standardpronunciation: any;
+  _standardpronunciationRequestModel: standardpronunciationRequestModel;
 
   constructor(private domSanitizer: DomSanitizer, private pronunciationservice: Pronunciationservice) { }
 
   ngOnInit() {
 
-
+    this._standardpronunciationRequestModel =
+    {
+      employeeID: '1123456',
+      fullName: 'Karthick'
+    }
   }
 
   getStandardPronunciation() {
-   this.standardpronunciation=this.pronunciationservice.GetStandardPronunciation("test");
+    this.standardpronunciation = this.pronunciationservice.GetStandardPronunciation(this._standardpronunciationRequestModel);
   }
 
   sanitize(url: string) {

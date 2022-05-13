@@ -1,83 +1,131 @@
 <div class="container">
-    <div class="panel-group">
-        <div class="panel panel-danger">
-            <div class="panel-body">
-                <div>
-                    <i class="fs-4 bi bi-mic"></i><u><span>My Pronunciation</span></u>
-                </div>
-                <br />
-
-
-                <div class="form-group row">
-                    <label for="inputFName" class="col-sm-2 col-form-label">First Name</label>
-                    <div class="col-sm-4">
-                        <input type="text" value="Karthick" class="form-control" id="inputFName"
-                            placeholder="First Name" readonly="true">
-                    </div>
-                </div>
-                <br />
-                <div class="form-group row">
-                    <label for="inputLName" class="col-sm-2 col-form-label">Last Name</label>
-                    <div class="col-sm-4">
-                        <input type="text" value="R" class="form-control" id="inputLName" placeholder="Last Name"
-                            readonly="true">
-                    </div>
-                </div>
-                <br />
-
-                <div class="form-group row">
-                    <label class="col-sm-4 col-form-label">
-                        <a (click)="getStandardPronunciation()"><i class="bi bi-play-circle"></i>Click here for
-                            Standard
-                            Pronunciation</a></label>
-                    <label class="col-sm-4 col-form-label"> <a><i class="bi bi-play-circle"></i>Click here for
-                            Custom
-                            Pronunciation</a></label>
-                </div>
-                <br />
-                <div>
-                    <label class="col-sm-8 col-form-label">
-                        <i class="bi bi-emoji-frown"></i> Not Happy with the Standard Pronunciation,<a>Set your
-                            Custom
-                            Pronunciation <i class="bi bi-emoji-smile"></i></a>
+    <div class="card">
+        <div class="card-header" (click)="ismyInfoHidden=!ismyInfoHidden">
+            <i class="bi bi-people"></i><span>&nbsp;&nbsp;My Info</span>
+            <div style="float:right">
+                <i class="fs-4 bi bi-arrow-up-circle-fill" [hidden]="ismyInfoHidden"></i>
+                <i class="fs-4 bi bi-arrow-down-circle-fill" [hidden]="!ismyInfoHidden"></i>
+            </div>
+        </div>
+        <div class="card-body" [hidden]="ismyInfoHidden">
+            <div class="form-group row">
+                <div class="col-12">
+                    <label class="control-label">
+                        Employee ID:
+                    </label>
+                    <label class="control-label">
+                        1918301
                     </label>
                 </div>
-                <br />
-                <div class="form-group row">
-                    <div class="col-sm-2">
-                        <button (click)="initiateRecording()" class="btn btn-primary" [disabled]="recording"
-                            style="cursor: pointer;"> <i class="bi bi-mic"></i>Start Recording </button>
-                    </div>
-                    <div class="col-sm-2">
-                        <button (click)="stopRecording()" class="btn btn-danger" [disabled]="!recording"
-                            style="cursor: pointer;"> <i class="bi bi-record-btn"></i>&nbsp;Stop Recording </button>
-                    </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label class="control-label">
+                        First Name:
+                    </label>
+                    <label class="control-label">
+                        Karthick
+                    </label>
                 </div>
-                <br />
-
-                <div class="form-group row" *ngIf="recording">
-                    <div class="col-sm-4">
-                        <div style="height: 85px;background-color:#e9ecef;border:2px dotted #d71e28">
-                            <div style="text-align:center;">
-                                <img src="assets/image/recordbutton.gif" style="text-align:center;" />
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-4">
+                    <label class="control-label">
+                        Last Name:
+                    </label>
+                    <label class="control-label">
+                        R
+                    </label>
                 </div>
-                <div class="form-group row" *ngIf="url">
-                    <div class="col-sm-10">
-                        <audio controls="">
-                            <source [src]="sanitize(url)" type="audio/wav">
-                        </audio>
-                    </div>
+                <div class="col-4">
+                    <label class="control-label">
+                        Email:
+                    </label>
+                    <label class="control-label">
 
+                    </label>
                 </div>
-                <br />
-                <div class="form-group row">
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label class="control-label">
+                        Phone:
+                    </label>
+                    <label>
 
+                    </label>
+                </div>
+                <div class="col-4">
+                    <label class="control-label">
+                        Manager Name:
+                    </label>
+                    <label class="control-label">
+
+                    </label>
                 </div>
             </div>
         </div>
     </div>
+    <br />
+    <div class="card">
+        <div class="card-header" (click)="ispronunciationHidden=!ispronunciationHidden">
+            <i class="fs-4 bi bi-mic"></i><span>My Pronunciation</span>
+            <div style="float:right">
+                <i class="fs-4 bi bi-arrow-up-circle-fill" [hidden]="ispronunciationHidden"></i>
+                <i class="fs-4 bi bi-arrow-down-circle-fill" [hidden]="!ispronunciationHidden"></i>
+            </div>
+        </div>
+        <div class="card-body" [hidden]="ispronunciationHidden">
 
+            <div class="form-group row">
+                <label class="col-sm-4 col-form-label">
+                    <a (click)="getStandardPronunciation()"><i class="bi bi-play-circle"></i>Click here for
+                        Standard
+                        Pronunciation</a></label>
+                <label class="col-sm-4 col-form-label"> <a><i class="bi bi-play-circle"></i>Click here for
+                        Custom
+                        Pronunciation</a></label>
+            </div>
+            <br />
+            <div>
+                <label class="col-sm-8 col-form-label">
+                    <i class="bi bi-emoji-frown"></i> Not Happy with the Standard Pronunciation,<a>Set your
+                        Custom
+                        Pronunciation <i class="bi bi-emoji-smile"></i></a>
+                </label>
+            </div>
+            <br />
+            <div class="form-group row">
+                <div class="col-sm-2">
+                    <button (click)="initiateRecording()" class="btn btn-primary" [disabled]="recording"
+                        style="cursor: pointer;"> <i class="bi bi-mic"></i>Start Recording </button>
+                </div>
+                <div class="col-sm-2">
+                    <button (click)="stopRecording()" class="btn btn-danger" [disabled]="!recording"
+                        style="cursor: pointer;"> <i class="bi bi-record-btn"></i>&nbsp;Stop Recording </button>
+                </div>
+            </div>
+            <br />
+
+            <div class="form-group row" *ngIf="recording">
+                <div class="col-sm-4">
+                    <div style="height: 85px;background-color:#e9ecef;border:2px dotted #d71e28">
+                        <div style="text-align:center;">
+                            <img src="assets/image/recordbutton.gif" style="text-align:center;" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row" *ngIf="url">
+                <div class="col-sm-10">
+                    <audio controls="">
+                        <source [src]="sanitize(url)" type="audio/wav">
+                    </audio>
+                </div>
+
+            </div>
+            <br />
+            <div class="form-group row">
+
+            </div>
+        </div>
+    </div>
 </div>

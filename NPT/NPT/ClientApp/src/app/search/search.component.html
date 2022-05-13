@@ -1,11 +1,97 @@
-<div class="container">
-    <h2>Panels with Contextual Classes</h2>
-    <div class="panel-group">
-    
-      <div class="panel panel-danger">
-        <div class="panel-heading">Panel with panel-danger class</div>
-        <div class="panel-body">Panel Content</div>
-      </div>
+<div class="card">
+    <div class="card-header">
+        <i class="fs-5 bi bi-search"></i><span style="padding-left: 5px;">Look up for Pronunciation</span>
     </div>
-  </div>
-  
+    <div class="card-body">
+        <div class="form-group row">
+
+            <label for="inputPassword" class="col-sm-1 col-form-label">Search</label>
+            <div class="col-sm-6">
+                <input type="text" class="form-control" id="inputsearch" placeholder="Search with Name">
+            </div>
+            <div class="col-sm-1">
+                <img src="assets/image/search-button.png" class="btn_search_icon" title="Search" alt="Search"
+                    (click)="search()" />
+            </div>
+        </div>
+    </div>
+</div>
+<br />
+<ng-container *ngIf="showSearchresult">
+    <div class="card">
+        <div class="card-header" (click)="issearchInfoHidden=!issearchInfoHidden">
+            <i class="bi bi-people"></i><span>&nbsp;&nbsp;Search Results</span>
+            <div style="float:right">
+                <i class="fs-4 bi bi-arrow-up-circle-fill" [hidden]="issearchInfoHidden"></i>
+                <i class="fs-4 bi bi-arrow-down-circle-fill" [hidden]="!issearchInfoHidden"></i>
+            </div>
+        </div>
+        <div class="card-body" [hidden]="issearchInfoHidden">
+            <div class="form-group row">
+                <div class="col-12">
+                    <label class="control-label">
+                        Employee ID:
+                    </label>
+                    <label class="control-label">
+                        1918301
+                    </label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label class="control-label">
+                        First Name:
+                    </label>
+                    <label class="control-label">
+                        Karthick
+                    </label>
+                </div>
+                <div class="col-4">
+                    <label class="control-label">
+                        Last Name:
+                    </label>
+                    <label class="control-label">
+                        R
+                    </label>
+                </div>
+                <div class="col-4">
+                    <label class="control-label">
+                        Email:
+                    </label>
+                    <label class="control-label">
+
+                    </label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label class="control-label">
+                        Phone:
+                    </label>
+                    <label>
+
+                    </label>
+                </div>
+                <div class="col-4">
+                    <label class="control-label">
+                        Manager Name:
+                    </label>
+                    <label class="control-label">
+
+                    </label>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-4">
+                    <label class="control-label">
+                        Name Pronunciation :
+                    </label>
+                    <label class="control-label">
+                        &nbsp;&nbsp; <button class="btn btn-primary" style="cursor: pointer;"> <i
+                                class="bi bi-mic"></i>Listen</button>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-container>

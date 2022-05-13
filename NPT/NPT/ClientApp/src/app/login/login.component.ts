@@ -30,11 +30,11 @@ export class LoginComponent implements OnInit {
 
       }
       else {
-        alert('Please enter a Employee Id or Password.')
+        alert('Please enter a Employee Id and Password.')
       }
     }
     else {
-      alert('Please enter a Employee Id or Password.')
+      alert('Please enter a Employee Id and Password.')
     }
   }
 }

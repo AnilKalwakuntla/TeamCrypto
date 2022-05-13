@@ -18,7 +18,9 @@ export class MypronunciationComponent implements OnInit {
   public error: any;
   standardpronunciation: any;
   _standardpronunciationRequestModel: standardpronunciationRequestModel;
-
+  public ismyInfoHidden: boolean = false;
+  public ispronunciationHidden:boolean=false;
+  
   constructor(private domSanitizer: DomSanitizer, private pronunciationservice: Pronunciationservice) { }
 
   ngOnInit() {

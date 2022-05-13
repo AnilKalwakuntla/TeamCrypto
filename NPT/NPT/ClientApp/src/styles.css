@@ -1,16 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Provide sufficient contrast against white background */
-a {
-  color: #0366d6;
+body {
+    font-family: verdana, Arial, sans-serif;
 }
 
-code {
-  color: #e01a76;
+.card-header {
+    background-color: #d71e28 !important;
+    height: 37px;
+    color: white;
+    font-family: verdana, Arial, sans-serif;
+    font-size: 14px;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+.control-label {
+    font-size: 14px;
+}
+
+.lineHeight5 {
+    line-height: 5px;
+}
+
+.btn_search_icon {
+    height: 2.5em;
+    margin-left: 0.5em;
+}
+
+.btn_search_icon:hover {
+    cursor: pointer;
 }

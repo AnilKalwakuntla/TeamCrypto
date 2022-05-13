@@ -15,9 +15,10 @@ namespace NPT.Controllers
     {
 
 
+       
         [Route("api/pronunciation/GetStandardPronunciation/v1")]
         [HttpPost]
-        public CustomPronunciationResponseModel GetStandardPronunciation([FromBody] string name)
+        public CustomPronunciationResponseModel GetStandardPronunciation ([FromBody] CustomPronunciationRequestModel requestModel)
         {
             CustomPronunciationResponseModel response = new CustomPronunciationResponseModel();
             response.EmpId = "test";

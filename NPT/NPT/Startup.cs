@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.OpenApi.Models;
+using System;
 
 namespace NPT
 {
@@ -26,6 +28,8 @@ namespace NPT
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            services.AddSwaggerGen();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -41,7 +45,18 @@ namespace NPT
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            // Enable middleware to serve generated Swagger as a JSON endpoint.
+            app.UseSwagger();
 
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.),
+            // specifying the Swagger JSON endpoint.
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Hackathon API V1");
+
+                // To serve SwaggerUI at application's root page, set the RoutePrefix property to an empty string.
+                //c.RoutePrefix = string.Empty;
+            });
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             if (!env.IsDevelopment())
@@ -53,9 +68,10 @@ namespace NPT
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller}/{action=Index}/{id?}");
+                //endpoints.MapControllerRoute(
+                //    name: "default",
+                //    pattern: "{controller}/{action=Index}/{id?}");
+                endpoints.MapControllers();
             });
 
             app.UseSpa(spa =>

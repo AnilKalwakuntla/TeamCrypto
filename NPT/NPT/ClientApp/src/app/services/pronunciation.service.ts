@@ -1,19 +1,27 @@
 import { Component, Inject, Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
+import { standardpronunciationRequestModel } from 'src/app/models/standardpronunciationmodel';
+
 @Injectable()
 export class Pronunciationservice {
-    
-    url:string='';
-    constructor(private httpClient: HttpClient,@Inject('BASE_URL') baseUrl: string) {
-        this.url=baseUrl;
+
+    url: string = '';
+    constructor(private httpClient: HttpClient, @Inject('BASE_URL') baseUrl: string) {
+        this.url = baseUrl;
     }
 
-    GetStandardPronunciation(name:string) {
-        
-         this.url= this.url + 'api/pronunciation/GetStandardPronunciation/v1'
-         console.log(this.url);
-         console.log(name);
-        return this.httpClient.post(this.url,name);
+    GetStandardPronunciation(standardpronunciationRequestModel: standardpronunciationRequestModel) {
+        var httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        let apiurl = this.url + 'api/pronunciation/GetStandardPronunciation/v1'
+        console.log(apiurl);
+        return this.httpClient.post<any>(apiurl, standardpronunciationRequestModel, httpOptions).subscribe({
+            next: data => {
+                console.log(data);
+            },
+            error: error => {
+                console.error('There was an error!', error);
+            }
+        })
     }
 }

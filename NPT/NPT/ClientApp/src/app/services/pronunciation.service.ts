@@ -1,7 +1,8 @@
 import { Component, Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { standardpronunciationRequestModel } from 'src/app/models/standardpronunciationmodel';
+import { pronunciationUserDetailRequestModel,pronunciationUserDetailResponseModel } from 'src/app/models/pronunciationuserDetailsmodel'
 
 @Injectable()
 export class Pronunciationservice {
@@ -11,11 +12,11 @@ export class Pronunciationservice {
         this.url = baseUrl;
     }
 
-    GetStandardPronunciation(standardpronunciationRequestModel: standardpronunciationRequestModel) {
+    GetStandardPronunciation(param: standardpronunciationRequestModel) {
         var httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         let apiurl = this.url + 'api/pronunciation/GetStandardPronunciation/v1'
         console.log(apiurl);
-        return this.httpClient.post<any>(apiurl, standardpronunciationRequestModel, httpOptions).subscribe({
+        return this.httpClient.post<any>(apiurl, param, httpOptions).subscribe({
             next: data => {
                 console.log(data);
             },
@@ -23,5 +24,13 @@ export class Pronunciationservice {
                 console.error('There was an error!', error);
             }
         })
+    }
+
+    GetProunciationUserDetails(param:pronunciationUserDetailRequestModel):Observable<pronunciationUserDetailResponseModel>
+    {
+        var httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        let apiurl = this.url + 'api/pronunciation/GetStandardPronunciation/v1'
+        console.log(apiurl);
+        return this.httpClient.post<pronunciationUserDetailResponseModel>(apiurl, param, httpOptions);
     }
 }

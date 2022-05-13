@@ -3,6 +3,7 @@ import * as RecordRTC from 'recordrtc';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Pronunciationservice } from 'src/app/services/pronunciation.service';
 import { standardpronunciationRequestModel } from 'src/app/models/standardpronunciationmodel';
+import { pronunciationUserDetailRequestModel, pronunciationUserDetailResponseModel } from 'src/app/models/pronunciationuserDetailsmodel'
 
 @Component({
   selector: 'app-mypronunciation',
@@ -11,16 +12,19 @@ import { standardpronunciationRequestModel } from 'src/app/models/standardpronun
 })
 export class MypronunciationComponent implements OnInit {
   private record: any;
-  //Will use this flag for detect recording
   public recording = false;
-  //Url of Blob
   public url: any;
   public error: any;
+
+  public ismyInfoHidden: boolean = false;
+  public ispronunciationHidden: boolean = false;
+
   standardpronunciation: any;
   _standardpronunciationRequestModel: standardpronunciationRequestModel;
-  public ismyInfoHidden: boolean = false;
-  public ispronunciationHidden:boolean=false;
-  
+  pronunciationUserDetailrequest: pronunciationUserDetailRequestModel;
+  pronunciationUserDetailresponse: pronunciationUserDetailResponseModel;
+
+
   constructor(private domSanitizer: DomSanitizer, private pronunciationservice: Pronunciationservice) { }
 
   ngOnInit() {
@@ -30,8 +34,33 @@ export class MypronunciationComponent implements OnInit {
       employeeID: '1123456',
       fullName: 'Anil Kumar Kalwakuntla'
     }
+    this.initvariables();
+  }
+  initvariables() {
+    this.pronunciationUserDetailresponse =
+    {
+      loggedinId: '',
+      employeeId: '',
+      firstname: '',
+      lastname: '',
+      fullname: '',
+      emailAddress: '',
+      phone: '',
+      managername: '',
+      isAdmin: false,
+      iscustomPronunciationAvailable: false,
+      lastUpdatedDate: null
+    }
   }
 
+  getProunciationUserDetails() {
+    this.pronunciationUserDetailrequest = {
+      loggedinId: 'karthicknexus@wfhackathon2022.onmicrosoft.com'
+    }
+    this.pronunciationservice.GetProunciationUserDetails(this.pronunciationUserDetailrequest).subscribe(res=> {
+      this.pronunciationUserDetailresponse = res;
+    });
+  }
   getStandardPronunciation() {
     this.standardpronunciation = this.pronunciationservice.GetStandardPronunciation(this._standardpronunciationRequestModel);
   }

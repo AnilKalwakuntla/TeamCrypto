@@ -38,7 +38,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NPT.Model\NPT.Model.csproj" />
-    <ProjectReference Include="..\NPT.Operation\NPT.Operation.csproj" />
+    <ProjectReference Include="..\NPT.Operation\NPT.DataAccess.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">

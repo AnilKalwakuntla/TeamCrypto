@@ -7,11 +7,14 @@ import { Router } from '@angular/router'
 })
 
 export class HomeComponent implements OnInit {
-  public loggedinUsername: string = '';
+    public loggedinUsername: string = '';
+    public username: string = '';
+
   constructor(private router: Router) { }
 
-  ngOnInit(): void {
-    this.loggedinUsername = "Karthick R"
+    ngOnInit(): void {
+        this.loggedinUsername = sessionStorage.getItem('loggedUser');
+        console.log(this.loggedinUsername);        
   }
 
   logout() {

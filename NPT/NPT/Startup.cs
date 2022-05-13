@@ -7,6 +7,10 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using System;
+using Microsoft.Identity.Web;
+using Microsoft.Identity.Web.UI;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc.Authorization;
 
 namespace NPT
 {
@@ -23,6 +27,14 @@ namespace NPT
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            //services.AddMicrosoftIdentityWebAppAuthentication(Configuration, "AzureAd");
+            //services.AddMvc(option =>
+            //{
+            //    var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+            //    option.Filters.Add(new AuthorizeFilter(policy));
+            //}).AddMicrosoftIdentityUI();
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -65,7 +77,8 @@ namespace NPT
             }
 
             app.UseRouting();
-
+            //app.UseAuthentication();
+            //app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
                 //endpoints.MapControllerRoute(

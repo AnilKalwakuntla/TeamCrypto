@@ -26,7 +26,7 @@ export class MypronunciationComponent implements OnInit {
     this._standardpronunciationRequestModel =
     {
       employeeID: '1123456',
-      fullName: 'Karthick'
+      fullName: 'Anil Kumar Kalwakuntla'
     }
   }
 

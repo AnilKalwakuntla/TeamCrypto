@@ -1,27 +1,28 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT\\NPT.csproj": {}
+    "C:\\Users\\Anil Kalwakuntla\\source\\repos\\TeamCrypto1\\NPT\\NPT\\NPT.csproj": {}
   },
   "projects": {
-    "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT.Model\\NPT.Model.csproj": {
+    "C:\\Users\\Anil Kalwakuntla\\source\\repos\\TeamCrypto1\\NPT\\NPT.Model\\NPT.Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT.Model\\NPT.Model.csproj",
+        "projectUniqueName": "C:\\Users\\Anil Kalwakuntla\\source\\repos\\TeamCrypto1\\NPT\\NPT.Model\\NPT.Model.csproj",
         "projectName": "NPT.Model",
-        "projectPath": "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT.Model\\NPT.Model.csproj",
-        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT.Model\\obj\\",
+        "projectPath": "C:\\Users\\Anil Kalwakuntla\\source\\repos\\TeamCrypto1\\NPT\\NPT.Model\\NPT.Model.csproj",
+        "packagesPath": "C:\\Users\\Anil Kalwakuntla\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Anil Kalwakuntla\\source\\repos\\TeamCrypto1\\NPT\\NPT.Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Anil Kalwakuntla\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "https://www.nuget.org/packages": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
@@ -53,28 +54,29 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.407\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT.Operation\\NPT.Operation.csproj": {
+    "C:\\Users\\Anil Kalwakuntla\\source\\repos\\TeamCrypto1\\NPT\\NPT.Operation\\NPT.Operation.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT.Operation\\NPT.Operation.csproj",
+        "projectUniqueName": "C:\\Users\\Anil Kalwakuntla\\source\\repos\\TeamCrypto1\\NPT\\NPT.Operation\\NPT.Operation.csproj",
         "projectName": "NPT.Operation",
-        "projectPath": "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT.Operation\\NPT.Operation.csproj",
-        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT.Operation\\obj\\",
+        "projectPath": "C:\\Users\\Anil Kalwakuntla\\source\\repos\\TeamCrypto1\\NPT\\NPT.Operation\\NPT.Operation.csproj",
+        "packagesPath": "C:\\Users\\Anil Kalwakuntla\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Anil Kalwakuntla\\source\\repos\\TeamCrypto1\\NPT\\NPT.Operation\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Anil Kalwakuntla\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "https://www.nuget.org/packages": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
@@ -106,38 +108,39 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.407\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT\\NPT.csproj": {
+    "C:\\Users\\Anil Kalwakuntla\\source\\repos\\TeamCrypto1\\NPT\\NPT\\NPT.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT\\NPT.csproj",
+        "projectUniqueName": "C:\\Users\\Anil Kalwakuntla\\source\\repos\\TeamCrypto1\\NPT\\NPT\\NPT.csproj",
         "projectName": "NPT",
-        "projectPath": "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT\\NPT.csproj",
-        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT\\obj\\",
+        "projectPath": "C:\\Users\\Anil Kalwakuntla\\source\\repos\\TeamCrypto1\\NPT\\NPT\\NPT.csproj",
+        "packagesPath": "C:\\Users\\Anil Kalwakuntla\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Anil Kalwakuntla\\source\\repos\\TeamCrypto1\\NPT\\NPT\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Anil Kalwakuntla\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
-          "https://www.nuget.org/packages": {}
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT.Model\\NPT.Model.csproj": {
-                "projectPath": "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT.Model\\NPT.Model.csproj"
+              "C:\\Users\\Anil Kalwakuntla\\source\\repos\\TeamCrypto1\\NPT\\NPT.Model\\NPT.Model.csproj": {
+                "projectPath": "C:\\Users\\Anil Kalwakuntla\\source\\repos\\TeamCrypto1\\NPT\\NPT.Model\\NPT.Model.csproj"
               },
-              "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT.Operation\\NPT.Operation.csproj": {
-                "projectPath": "C:\\Users\\user\\source\\repos\\TeamCrypto\\NPT\\NPT.Operation\\NPT.Operation.csproj"
+              "C:\\Users\\Anil Kalwakuntla\\source\\repos\\TeamCrypto1\\NPT\\NPT.Operation\\NPT.Operation.csproj": {
+                "projectPath": "C:\\Users\\Anil Kalwakuntla\\source\\repos\\TeamCrypto1\\NPT\\NPT.Operation\\NPT.Operation.csproj"
               }
             }
           }
@@ -152,9 +155,47 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.24, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[3.1.24, )"
+            },
             "Microsoft.AspNetCore.SpaServices.Extensions": {
               "target": "Package",
               "version": "[3.1.23, )"
+            },
+            "Microsoft.CognitiveServices.Speech": {
+              "target": "Package",
+              "version": "[1.21.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[3.1.24, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[3.1.24, )"
+            },
+            "Microsoft.Identity.Web": {
+              "target": "Package",
+              "version": "[1.24.1, )"
+            },
+            "Microsoft.Identity.Web.UI": {
+              "target": "Package",
+              "version": "[1.24.1, )"
+            },
+            "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
+              "target": "Package",
+              "version": "[3.1.5, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.3.1, )"
             }
           },
           "imports": [
@@ -175,7 +216,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.407\\RuntimeIdentifierGraph.json"
         }
       }
     }

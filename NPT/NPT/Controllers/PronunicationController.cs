@@ -8,6 +8,7 @@ using NPT.Model.RequestModel;
 using NPT.Model.ResponseModel;
 using Microsoft.CognitiveServices.Speech;
 using System.IO;
+using NPT.DataAccess.Interfaces;
 
 namespace NPT.Controllers
 {
@@ -18,6 +19,7 @@ namespace NPT.Controllers
         static string YourSubscriptionKey = "7ef35f6306fa4d8c9f4effc70c5db688";
         static string YourServiceRegion = "eastus";
 
+        private readonly IPronunciationRepository PronunciationRepository = null;
 
         [Route("api/pronunciation/GetStandardPronunciation/v1")]
         [HttpPost]
@@ -29,7 +31,6 @@ namespace NPT.Controllers
             try
             {
 
-                
                 //speechConfig.SpeechSynthesisVoiceName = "en-US-JennyNeural";
                 speechConfig.SpeechSynthesisVoiceName = "en-IN-PrabhatNeural";
 
@@ -46,22 +47,14 @@ namespace NPT.Controllers
             }
             catch (Exception)
             {
-
                 throw;
             }
-
             finally
             {
                 speechSynthesizer.Dispose();
-
             }
             
-
-
-
             return null;
-
-
 
         }
 
@@ -88,7 +81,20 @@ namespace NPT.Controllers
             }
         }
 
-
+        [Route("api/pronunciation/GetUserPronunciationDetails/v1")]
+        [HttpPost]
+        public async Task<ActionResult> GetUserPronunciationDetails([FromBody] UserPronunciationDetailsRequestModel request)
+        {
+            try
+            {
+                return Ok(await PronunciationRepository.GetUserPronunciationDetails(request));
+            }
+            catch(Exception)
+            {
+                throw;
+            }
+            
+        }
 
 
         

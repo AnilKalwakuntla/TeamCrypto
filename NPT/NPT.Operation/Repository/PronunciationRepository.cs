@@ -21,6 +21,7 @@ namespace NPT.DataAccess.Repository
             response.Fullname = "Karthick R";
             response.Phone = "99-999999";
             response.EmailAddress = "karthicknexus@wfhackathon2022.onmicrosoft.com";
+            response.Managername = "Soma Bhushan";
             response.IsAdmin = false;
             response.IsCustomPronunciationAvailable = false;
             return response;

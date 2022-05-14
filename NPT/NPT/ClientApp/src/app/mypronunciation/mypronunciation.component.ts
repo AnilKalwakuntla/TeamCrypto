@@ -59,6 +59,7 @@ export class MypronunciationComponent implements OnInit {
       loggedinId: 'karthicknexus@wfhackathon2022.onmicrosoft.com'
     }
     this.pronunciationservice.GetProunciationUserDetails(this.pronunciationUserDetailrequest).subscribe(res=> {
+      console.log(res);
       this.pronunciationUserDetailresponse = res;
     });
   }

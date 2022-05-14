@@ -10,6 +10,7 @@ using Microsoft.CognitiveServices.Speech;
 using System.IO;
 using NPT.DataAccess.Interfaces;
 using Npgsql;
+using NPT.DataAccess.Repository;
 
 namespace NPT.Controllers
 {
@@ -20,8 +21,9 @@ namespace NPT.Controllers
         static string YourSubscriptionKey = "7ef35f6306fa4d8c9f4effc70c5db688";
         static string YourServiceRegion = "eastus";
 
-        private readonly IPronunciationRepository PronunciationRepository = null;
+         PronunciationRepository repo = new PronunciationRepository();
 
+       
 
         static void PostgreSQLConnection()
         {
@@ -107,7 +109,7 @@ namespace NPT.Controllers
         {
             try
             {
-                return Ok(await PronunciationRepository.GetUserPronunciationDetails(request));
+                return Ok(await repo.GetUserPronunciationDetails(request));
             }
             catch(Exception)
             {

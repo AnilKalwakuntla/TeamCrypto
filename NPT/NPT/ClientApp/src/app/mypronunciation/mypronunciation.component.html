@@ -9,12 +9,20 @@
         </div>
         <div class="card-body" [hidden]="ismyInfoHidden">
             <div class="form-group row">
-                <div class="col-12">
+                <div class="col-4">
                     <label class="control-label">
                         Employee ID:
                     </label>
                     <label class="control-label">
-                        1918301
+                        {{ pronunciationUserDetailresponse.employeeId}}
+                    </label>
+                </div>
+                <div class="col-8">
+                    <label class="control-label">
+                        Email:
+                    </label>
+                    <label class="control-label">
+                        {{ pronunciationUserDetailresponse.emailAddress}}
                     </label>
                 </div>
             </div>
@@ -24,7 +32,7 @@
                         First Name:
                     </label>
                     <label class="control-label">
-                        Karthick
+                        {{ pronunciationUserDetailresponse.firstname}}
                     </label>
                 </div>
                 <div class="col-4">
@@ -32,33 +40,36 @@
                         Last Name:
                     </label>
                     <label class="control-label">
-                        R
+                        {{ pronunciationUserDetailresponse.lastname}}
                     </label>
                 </div>
                 <div class="col-4">
                     <label class="control-label">
-                        Email:
+                        Phone:
                     </label>
                     <label class="control-label">
-
+                        {{ pronunciationUserDetailresponse.phone}}
                     </label>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-4">
                     <label class="control-label">
-                        Phone:
+                        Manager Name:
                     </label>
-                    <label>
-
+                    <label class="control-label">
+                        {{ pronunciationUserDetailresponse.managername}}
                     </label>
                 </div>
                 <div class="col-4">
                     <label class="control-label">
-                        Manager Name:
+                        Is Admin ? :
                     </label>
                     <label class="control-label">
-
+                        <input type="radio" id="admintrue" [value]="true" [(ngModel)]="pronunciationUserDetailresponse.isAdmin">
+                        <label for="admintrue">True</label>
+                        <input type="radio" id="adminfalse" [value]="false" [(ngModel)]="pronunciationUserDetailresponse.isAdmin">
+                        <label for="adminfalse">False</label>
                     </label>
                 </div>
             </div>
@@ -74,18 +85,20 @@
             </div>
         </div>
         <div class="card-body" [hidden]="ispronunciationHidden">
-
             <div class="form-group row">
                 <label class="col-sm-4 col-form-label">
                     <a (click)="getStandardPronunciation()"><i class="bi bi-play-circle"></i>Click here for
                         Standard
                         Pronunciation</a></label>
-                <label class="col-sm-4 col-form-label"> <a><i class="bi bi-play-circle"></i>Click here for
-                        Custom
-                        Pronunciation</a></label>
+                <ng-container *ngIf="!pronunciationUserDetailresponse.iscustomPronunciationAvailable">
+                    <label class="col-sm-4 col-form-label"> <a><i class="bi bi-play-circle"></i>Click here for
+                            Custom
+                            Pronunciation</a>
+                    </label>
+                </ng-container>
             </div>
             <br />
-            <div>
+            <div *ngIf="!pronunciationUserDetailresponse.iscustomPronunciationAvailable">
                 <label class="col-sm-8 col-form-label">
                     <i class="bi bi-emoji-frown"></i> Not Happy with the Standard Pronunciation,<a>Set your
                         Custom
@@ -93,7 +106,7 @@
                 </label>
             </div>
             <br />
-            <div class="form-group row">
+            <div class="form-group row" *ngIf="pronunciationUserDetailresponse.iscustomPronunciationAvailable">
                 <div class="col-sm-2">
                     <button (click)="initiateRecording()" class="btn btn-primary" [disabled]="recording"
                         style="cursor: pointer;"> <i class="bi bi-mic"></i>Start Recording </button>

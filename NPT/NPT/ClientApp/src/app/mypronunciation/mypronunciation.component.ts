@@ -34,7 +34,8 @@ export class MypronunciationComponent implements OnInit {
       employeeID: '1123456',
       fullName: 'Anil Kumar Kalwakuntla'
     }
-    this.initvariables();
+      this.initvariables();
+      this.getProunciationUserDetails();
   }
   initvariables() {
     this.pronunciationUserDetailresponse =

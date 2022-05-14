@@ -9,6 +9,7 @@ using NPT.Model.ResponseModel;
 using Microsoft.CognitiveServices.Speech;
 using System.IO;
 using NPT.DataAccess.Interfaces;
+using Npgsql;
 
 namespace NPT.Controllers
 {
@@ -20,6 +21,25 @@ namespace NPT.Controllers
         static string YourServiceRegion = "eastus";
 
         private readonly IPronunciationRepository PronunciationRepository = null;
+
+
+        static void PostgreSQLConnection()
+        {
+            string strConnString = "Server=postgrescrypto.postgres.database.azure.com;Port=5432;User Id=cryptoadmin;Password=Admin$123;Database=postgres";
+            try
+            {
+                NpgsqlConnection objpostgraceConn = new NpgsqlConnection(strConnString);
+                objpostgraceConn.Open();
+                string strpostgracecommand = "select * from employee_full_details";
+                NpgsqlDataAdapter objDataAdapter = new NpgsqlDataAdapter(strpostgracecommand, objpostgraceConn);
+                objpostgraceConn.Close();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+                //System.Windows.Forms.MessageBox.Show(ex.Message, "Error Occured", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
 
         [Route("api/pronunciation/GetStandardPronunciation/v1")]
         [HttpPost]

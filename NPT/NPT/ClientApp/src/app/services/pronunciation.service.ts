@@ -29,7 +29,7 @@ export class Pronunciationservice {
     GetProunciationUserDetails(param:pronunciationUserDetailRequestModel):Observable<pronunciationUserDetailResponseModel>
     {
         var httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
-        let apiurl = this.url + 'api/pronunciation/GetStandardPronunciation/v1'
+        let apiurl = this.url + 'api/pronunciation/GetUserPronunciationDetails/v1'
         console.log(apiurl);
         return this.httpClient.post<pronunciationUserDetailResponseModel>(apiurl, param, httpOptions);
     }

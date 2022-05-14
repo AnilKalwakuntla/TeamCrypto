@@ -10,5 +10,7 @@ namespace NPT.DataAccess.Interfaces
     public interface IPronunciationRepository
     {
         Task<UserPronunciationDetailsResponseModel> GetUserPronunciationDetails(UserPronunciationDetailsRequestModel request);
+
+        Task<SaveCustomPronunciationResponseModel> SaveCustomPronunciation(SaveCustomPronunciationRequestModel request);
     }
 }

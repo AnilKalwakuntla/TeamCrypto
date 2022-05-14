@@ -3,7 +3,7 @@ import * as RecordRTC from 'recordrtc';
 import { DomSanitizer } from '@angular/platform-browser';
 import { Pronunciationservice } from 'src/app/services/pronunciation.service';
 import { standardpronunciationRequestModel } from 'src/app/models/standardpronunciationmodel';
-import { pronunciationUserDetailRequestModel, pronunciationUserDetailResponseModel } from 'src/app/models/pronunciationuserDetailsmodel'
+import { pronunciationUserDetailRequestModel, pronunciationUserDetailResponseModel, saveCustomPronunciationRequestModel, saveCustomPronunciationResponseModel } from 'src/app/models/pronunciationuserDetailsmodel'
 
 @Component({
   selector: 'app-mypronunciation',
@@ -18,24 +18,28 @@ export class MypronunciationComponent implements OnInit {
 
   public ismyInfoHidden: boolean = false;
   public ispronunciationHidden: boolean = false;
+  public isstandardpronunciationHidden: boolean=false;
+  public loggedinUserID: string;
 
   standardpronunciation: any;
-  _standardpronunciationRequestModel: standardpronunciationRequestModel;
+  standardpronunciationrequest: standardpronunciationRequestModel;
   pronunciationUserDetailrequest: pronunciationUserDetailRequestModel;
   pronunciationUserDetailresponse: pronunciationUserDetailResponseModel;
 
+  saveCustomPronunciationrequest: saveCustomPronunciationRequestModel;
+  saveCustomPronunciationresponse: saveCustomPronunciationResponseModel;
 
+  selectedcountry:string="";
+  selectedvoicespeed:string="Slow";
+  
   constructor(private domSanitizer: DomSanitizer, private pronunciationservice: Pronunciationservice) { }
 
   ngOnInit() {
 
-    this._standardpronunciationRequestModel =
-    {
-      employeeID: '1123456',
-      fullName: 'Anil Kumar Kalwakuntla'
-    }
-      this.initvariables();
-      this.getProunciationUserDetails();
+    //this.loggedinUserID = sessionStorage.getItem('loggedUser');
+    this.loggedinUserID = "karthicknexus@wfhackathon2022.onmicrosoft.com";
+    this.initvariables();
+    this.getProunciationUserDetails();
   }
   initvariables() {
     this.pronunciationUserDetailresponse =
@@ -52,20 +56,64 @@ export class MypronunciationComponent implements OnInit {
       iscustomPronunciationAvailable: false,
       lastUpdatedDate: null
     }
+    this.saveCustomPronunciationrequest =
+    {
+      loggedinId: '',
+      employeeId: '',
+      overrideStandardPronunciation: null,
+      customPronunciation: '',
+      isupdate: null,
+      comments: ''
+
+    }
+    this.saveCustomPronunciationresponse =
+    {
+      success: null,
+      customPronunciation: '',
+      overrideStandardPronunciation: null,
+      comments: '',
+
+    }
   }
 
   getProunciationUserDetails() {
+
     this.pronunciationUserDetailrequest = {
-      loggedinId: 'karthicknexus@wfhackathon2022.onmicrosoft.com'
+      loggedinId: this.loggedinUserID
     }
-    this.pronunciationservice.GetProunciationUserDetails(this.pronunciationUserDetailrequest).subscribe(res=> {
+    this.pronunciationservice.GetProunciationUserDetails(this.pronunciationUserDetailrequest).subscribe(res => {
       console.log(res);
       this.pronunciationUserDetailresponse = res;
     });
   }
   getStandardPronunciation() {
-    this.standardpronunciation = this.pronunciationservice.GetStandardPronunciation(this._standardpronunciationRequestModel);
+    this.standardpronunciationrequest =
+    {
+      employeeID: this.pronunciationUserDetailresponse.employeeId,
+      fullName: this.pronunciationUserDetailresponse.fullname,
+      country:this.selectedcountry,
+      voicespeed:this.selectedvoicespeed
+    }
+    console.log(this.standardpronunciationrequest);
+    this.standardpronunciation = this.pronunciationservice.GetStandardPronunciation(this.standardpronunciationrequest);
   }
+
+  saveProunciationUserDetails() {
+    /* AssignValues */
+
+    this.saveCustomPronunciationrequest.loggedinId = this.loggedinUserID;
+    this.saveCustomPronunciationrequest.employeeId = this.pronunciationUserDetailresponse.employeeId;
+    this.saveCustomPronunciationrequest.overrideStandardPronunciation = true;
+    this.saveCustomPronunciationrequest.isupdate = false;
+    this.saveCustomPronunciationrequest.comments = '';
+
+    console.log(this.saveCustomPronunciationrequest);
+    this.pronunciationservice.SaveProunciationUserDetails(this.saveCustomPronunciationrequest).subscribe(res => {
+      console.log(res);
+      this.saveCustomPronunciationresponse = res;
+    });
+  }
+
 
   sanitize(url: string) {
     return this.domSanitizer.bypassSecurityTrustUrl(url);
@@ -106,6 +154,7 @@ export class MypronunciationComponent implements OnInit {
   * @param  {any} blob Blog
   */
   processRecording(blob: any) {
+    this.saveCustomPronunciationrequest.customPronunciation = blob;
     this.url = URL.createObjectURL(blob);
   }
   /**

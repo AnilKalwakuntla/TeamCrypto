@@ -119,7 +119,21 @@ namespace NPT.Controllers
         }
 
 
-        
+        [Route("api/pronunciation/SaveCustomPronunciation/v1")]
+        [HttpPost]
+        public async Task<ActionResult> SaveCustomPronunciation([FromBody] SaveCustomPronunciationRequestModel request)
+        {
+            try
+            {
+                return Ok(await repo.SaveCustomPronunciation(request));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
     }
 
 }

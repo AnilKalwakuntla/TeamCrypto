@@ -2,7 +2,7 @@ import { Component, Inject, Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { standardpronunciationRequestModel } from 'src/app/models/standardpronunciationmodel';
-import { pronunciationUserDetailRequestModel,pronunciationUserDetailResponseModel } from 'src/app/models/pronunciationuserDetailsmodel'
+import { pronunciationUserDetailRequestModel,pronunciationUserDetailResponseModel,saveCustomPronunciationRequestModel,saveCustomPronunciationResponseModel } from 'src/app/models/pronunciationuserDetailsmodel'
 
 @Injectable()
 export class Pronunciationservice {
@@ -30,7 +30,15 @@ export class Pronunciationservice {
     {
         var httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         let apiurl = this.url + 'api/pronunciation/GetUserPronunciationDetails/v1'
-        console.log(apiurl);
         return this.httpClient.post<pronunciationUserDetailResponseModel>(apiurl, param, httpOptions);
     }
+
+    SaveProunciationUserDetails(param:saveCustomPronunciationRequestModel):Observable<saveCustomPronunciationResponseModel>
+    {
+        var httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        let apiurl = this.url + 'api/pronunciation/SaveCustomPronunciation/v1'
+        return this.httpClient.post<saveCustomPronunciationResponseModel>(apiurl, param, httpOptions);
+    }
+
+
 }

@@ -9,5 +9,9 @@ namespace NPT.Model.RequestModel
         public string EmployeeID { get; set; }
 
         public string FullName { get; set; }
+
+        public string Country { get; set; }
+
+        public string Voicespeed { get; set; }
     }
 }

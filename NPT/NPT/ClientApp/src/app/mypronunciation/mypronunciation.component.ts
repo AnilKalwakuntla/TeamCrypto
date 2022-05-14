@@ -36,8 +36,8 @@ export class MypronunciationComponent implements OnInit {
 
   ngOnInit() {
 
-    //this.loggedinUserID = sessionStorage.getItem('loggedUser');
-    this.loggedinUserID = "karthicknexus@wfhackathon2022.onmicrosoft.com";
+    this.loggedinUserID = sessionStorage.getItem('loggedUser');
+    //this.loggedinUserID = "karthicknexus@wfhackathon2022.onmicrosoft.com";
     this.initvariables();
     this.getProunciationUserDetails();
   }

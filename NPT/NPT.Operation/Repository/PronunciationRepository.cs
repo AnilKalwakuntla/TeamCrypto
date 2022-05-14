@@ -60,6 +60,15 @@ namespace NPT.DataAccess.Repository
                 conn.Close();
             }
         }
-        
-}
+
+        public async Task<SaveCustomPronunciationResponseModel> SaveCustomPronunciation(SaveCustomPronunciationRequestModel request)
+        {
+            SaveCustomPronunciationResponseModel response = new SaveCustomPronunciationResponseModel();
+
+            //insert into DB
+
+            response.Success = true;
+            return response;
+        }
+    }
 }

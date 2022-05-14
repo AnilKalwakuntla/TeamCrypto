@@ -29,7 +29,7 @@ namespace NPT.Controllers
 
         static void PostgreSQLConnection()
         {
-            string strConnString = "Server=postgrescrypto.postgres.database.azure.com;Port=5432;User Id=cryptoadmin;Password=Admin$123;Database=postgres";
+            string strConnString = "Server=postgrescrypto.postgres.database.azure.com;Port=5432;User Id=cryptoadmin;Password=Admin$123;Database=postgres;";
             try
             {
                 NpgsqlConnection objpostgraceConn = new NpgsqlConnection(strConnString);

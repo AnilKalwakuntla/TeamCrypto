@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router'
-import { loginrequestmodel } from '../models/loginmodel';
+
 import { GlobalFunctions } from '../Global';
+import { MsalService } from '@azure/msal-angular';
+import { AuthenticationResult } from '@azure/msal-browser';
 
 @Component({
   selector: 'app-login',
@@ -10,31 +12,19 @@ import { GlobalFunctions } from '../Global';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private router: Router) { }
-
-  public _loginrequestmodel: loginrequestmodel;
+  constructor(private router: Router, private msalService: MsalService) { }
 
   ngOnInit(): void {
-    this._loginrequestmodel =
-    {
-      username: '',
-      password: ''
-    }
 
   }
   login() {
-    if (!GlobalFunctions.IsNullorEmpty(this._loginrequestmodel.username)) {
-      if (!GlobalFunctions.IsNullorEmpty(this._loginrequestmodel.password)) {
-        //API CALL
-        this.router.navigate(['/home'])
-
+    this.msalService.loginPopup().subscribe((Response: AuthenticationResult) => {
+      this.msalService.instance.setActiveAccount(Response.account)
+      console.log(Response.account.username);
+      if (!GlobalFunctions.IsNullorEmpty(Response.account.username)) {
+        sessionStorage.setItem('loggedUser', Response.account.username);
+        this.router.navigate(["/home"]);
       }
-      else {
-        alert('Please enter a Employee Id and Password.')
-      }
-    }
-    else {
-      alert('Please enter a Employee Id and Password.')
-    }
+    });
   }
 }

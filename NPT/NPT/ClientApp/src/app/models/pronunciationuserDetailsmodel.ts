@@ -19,7 +19,7 @@ export interface pronunciationUserDetailResponseModel {
 export interface saveCustomPronunciationRequestModel {
     loggedinId: string,
     employeeId: string,
-    customPronunciation: string
+    customPronunciation: string,
     overrideStandardPronunciation: boolean,
     comments: string,
     isupdate:boolean

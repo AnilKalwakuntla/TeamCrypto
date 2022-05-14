@@ -12,13 +12,13 @@ import { pronunciationUserDetailRequestModel, pronunciationUserDetailResponseMod
 })
 export class MypronunciationComponent implements OnInit {
   private record: any;
-  public recording :boolean=false;
+  public recording: boolean = false;
   public url: any;
   public error: any;
 
   public ismyInfoHidden: boolean = false;
   public ispronunciationHidden: boolean = false;
-  public isstandardpronunciationHidden: boolean=false;
+  public isstandardpronunciationHidden: boolean = false;
   public loggedinUserID: string;
 
   standardpronunciation: any;
@@ -29,9 +29,9 @@ export class MypronunciationComponent implements OnInit {
   saveCustomPronunciationrequest: saveCustomPronunciationRequestModel;
   saveCustomPronunciationresponse: saveCustomPronunciationResponseModel;
 
-  selectedcountry:string="";
-  selectedvoicespeed:string="Slow";
-  
+  selectedcountry: string = "";
+  selectedvoicespeed: string = "Slow";
+
   constructor(private domSanitizer: DomSanitizer, private pronunciationservice: Pronunciationservice) { }
 
   ngOnInit() {
@@ -91,8 +91,8 @@ export class MypronunciationComponent implements OnInit {
     {
       employeeID: this.pronunciationUserDetailresponse.employeeId,
       fullName: this.pronunciationUserDetailresponse.fullname,
-      country:this.selectedcountry,
-      voicespeed:this.selectedvoicespeed
+      country: this.selectedcountry,
+      voicespeed: this.selectedvoicespeed
     }
     console.log(this.standardpronunciationrequest);
     this.standardpronunciation = this.pronunciationservice.GetStandardPronunciation(this.standardpronunciationrequest);
@@ -154,8 +154,14 @@ export class MypronunciationComponent implements OnInit {
   * @param  {any} blob Blog
   */
   processRecording(blob: any) {
-    this.saveCustomPronunciationrequest.customPronunciation = blob;
     this.url = URL.createObjectURL(blob);
+    this.convertBlobtobyte(blob);
+  }
+
+  convertBlobtobyte(blob) {
+    var reader = new FileReader();
+    reader.readAsDataURL(blob);
+    this.saveCustomPronunciationrequest.customPronunciation = reader.result.toString();
   }
   /**
   * Process Error.

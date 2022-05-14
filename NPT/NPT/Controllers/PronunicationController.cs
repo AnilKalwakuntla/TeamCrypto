@@ -122,7 +122,7 @@ namespace NPT.Controllers
 
         [Route("api/pronunciation/SaveCustomPronunciation/v1")]
         [HttpPost]
-        public async Task<ActionResult> SaveCustomPronunciation([FromForm] SaveCustomPronunciationRequestModel request)
+        public async Task<ActionResult> SaveCustomPronunciation([FromBody] SaveCustomPronunciationRequestModel request)
         {
             try
             {

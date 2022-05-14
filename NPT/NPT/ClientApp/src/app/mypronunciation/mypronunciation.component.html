@@ -66,10 +66,10 @@
                         Is Admin ? :
                     </label>
                     <label class="control-label">
-                        <input type="radio" id="admintrue" [value]="true" [(ngModel)]="pronunciationUserDetailresponse.isAdmin">
+                        <input type="radio" id="admintrue" [value]="true" disabled="true" [(ngModel)]="pronunciationUserDetailresponse.isAdmin">
                         <label for="admintrue">True</label>
-                        <input type="radio" id="adminfalse" [value]="false" [(ngModel)]="pronunciationUserDetailresponse.isAdmin">
-                        <label for="adminfalse">False</label>
+                        <input type="radio" id="adminfalse" [value]="false" disabled="true" [(ngModel)]="pronunciationUserDetailresponse.isAdmin">
+                        &nbsp;<label for="adminfalse">False</label>
                     </label>
                 </div>
             </div>

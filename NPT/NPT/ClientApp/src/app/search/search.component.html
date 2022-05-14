@@ -7,7 +7,7 @@
 
             <label for="inputPassword" class="col-sm-1 col-form-label">Search</label>
             <div class="col-sm-6">
-                <input type="text" class="form-control" id="inputsearch" placeholder="Search with Name">
+                <input type="text" class="form-control" [(ngModel)]="searchrequest.searchtxt" id="inputsearch" placeholder="Search with Lan Id">
             </div>
             <div class="col-sm-1">
                 <img src="assets/image/search-button.png" class="btn_search_icon" title="Search" alt="Search"
@@ -28,12 +28,20 @@
         </div>
         <div class="card-body" [hidden]="issearchInfoHidden">
             <div class="form-group row">
-                <div class="col-12">
+                <div class="col-4">
                     <label class="control-label">
                         Employee ID:
                     </label>
                     <label class="control-label">
-                        1918301
+                        {{ searchresponse.employeeId}}
+                    </label>
+                </div>
+                <div class="col-8">
+                    <label class="control-label">
+                        Email:
+                    </label>
+                    <label class="control-label">
+                        {{ searchresponse.emailAddress}}
                     </label>
                 </div>
             </div>
@@ -43,7 +51,7 @@
                         First Name:
                     </label>
                     <label class="control-label">
-                        Karthick
+                        {{ searchresponse.firstname}}
                     </label>
                 </div>
                 <div class="col-4">
@@ -51,33 +59,36 @@
                         Last Name:
                     </label>
                     <label class="control-label">
-                        R
+                        {{ searchresponse.lastname}}
                     </label>
                 </div>
                 <div class="col-4">
                     <label class="control-label">
-                        Email:
+                        Phone:
                     </label>
                     <label class="control-label">
-
+                        {{ searchresponse.phone}}
                     </label>
                 </div>
             </div>
             <div class="form-group row">
                 <div class="col-4">
                     <label class="control-label">
-                        Phone:
+                        Manager Name:
                     </label>
-                    <label>
-
+                    <label class="control-label">
+                        {{ searchresponse.managername}}
                     </label>
                 </div>
                 <div class="col-4">
                     <label class="control-label">
-                        Manager Name:
+                        Is Custom Pronunciation ? :
                     </label>
                     <label class="control-label">
-
+                        <input type="radio" id="custompronunciationtrue" [value]="true" disabled="true" [(ngModel)]="searchresponse.isAdmin">
+                        <label for="admintrue">Yes</label>
+                        <input type="radio" id="custompronunciationfalse" [value]="false" disabled="true" [(ngModel)]="searchresponse.isAdmin">
+                        <label for="adminfalse">No</label>
                     </label>
                 </div>
             </div>

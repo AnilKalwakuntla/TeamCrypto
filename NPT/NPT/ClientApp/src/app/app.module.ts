@@ -16,6 +16,7 @@ import { MypronunciationComponent } from './mypronunciation/mypronunciation.comp
 import { SearchComponent } from './search/search.component'
 import { MyteamComponent } from './myteam/myteam.component';
 import { Pronunciationservice } from './services/pronunciation.service';
+import { Searchservice } from './services/search.servics';
 import { IPublicClientApplication, PublicClientApplication } from '@azure/msal-browser';
 
 export function MSALInstanceFactory(): IPublicClientApplication {
@@ -52,7 +53,7 @@ export function MSALInstanceFactory(): IPublicClientApplication {
       { path: 'home', component: HomeComponent }
     ], { useHash: true, onSameUrlNavigation: 'reload' })
   ],
-    providers: [ Pronunciationservice,
+    providers: [ Pronunciationservice,Searchservice,
         {
             provide: MSAL_INSTANCE,
             useFactory: MSALInstanceFactory

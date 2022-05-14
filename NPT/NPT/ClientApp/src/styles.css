@@ -29,3 +29,21 @@ body {
 .btn_search_icon:hover {
     cursor: pointer;
 }
+
+.modal-header {
+    background-color: #d71e28 !important;
+    color: white;
+    font-family: verdana, Arial, sans-serif;
+    font-size: 14px;
+    height: 44px;
+}
+
+.modal-title {
+    margin-top: 0px;
+}
+
+.close {
+    color: #fff!important;
+    opacity: 1!important;
+    
+}

@@ -12,6 +12,7 @@ using NPT.DataAccess.Interfaces;
 using Npgsql;
 using NPT.DataAccess.Repository;
 
+
 namespace NPT.Controllers
 {
 
@@ -20,8 +21,9 @@ namespace NPT.Controllers
     {
         static string YourSubscriptionKey = "7ef35f6306fa4d8c9f4effc70c5db688";
         static string YourServiceRegion = "eastus";
+        public int Rate { get; set; }
 
-         PronunciationRepository repo = new PronunciationRepository();
+        PronunciationRepository repo = new PronunciationRepository();
 
        
 
@@ -49,21 +51,20 @@ namespace NPT.Controllers
         {
             var speechConfig = SpeechConfig.FromSubscription(YourSubscriptionKey, YourServiceRegion);
             var speechSynthesizer = new SpeechSynthesizer(speechConfig);
+                       
 
             try
             {
-
                 //speechConfig.SpeechSynthesisVoiceName = "en-US-JennyNeural";
-                speechConfig.SpeechSynthesisVoiceName = "en-IN-PrabhatNeural";
+                speechConfig.SpeechSynthesisVoiceName = requestModel.Country;
+               
 
                 using (speechSynthesizer = new SpeechSynthesizer(speechConfig))
                 {
-                    // Get text from the console and synthesize to the default speaker.
-                    //Console.WriteLine("Enter some text that you want to speak >");                  
-
+                   
                     var speechSynthesisResult = await speechSynthesizer.SpeakTextAsync(requestModel.FullName);
                     
-                    OutputSpeechSynthesisResult(speechSynthesisResult, requestModel.FullName);
+                   // OutputSpeechSynthesisResult(speechSynthesisResult, requestModel.FullName);
                     
                 }
             }

@@ -5,7 +5,8 @@ using NPT.DataAccess.Interfaces;
 using System.Threading.Tasks;
 using NPT.Model.RequestModel;
 using NPT.Model.ResponseModel;
-
+using Npgsql;
+using System.Data;
 
 namespace NPT.DataAccess.Repository
 {
@@ -13,17 +14,53 @@ namespace NPT.DataAccess.Repository
     {
        public async Task<SearchResponseModel> SearchPronunciationDetails(SearchRequestModel request)
         {
-            SearchResponseModel response = new SearchResponseModel();
-            response.LoggedinId = "karthicknexus@wfhackathon2022.onmicrosoft.com";
-            response.EmployeeId = "1918301";
-            response.Firstname = "Karthick";
-            response.Lastname = "R";
-            response.Fullname = "Karthick R";
-            response.Phone = "99-999999";
-            response.EmailAddress = "karthicknexus@wfhackathon2022.onmicrosoft.com";
-            response.Managername = "Soma Bhushan";
-            response.IsCustomPronunciationAvailable = false;
-            return response;
+            {
+                string strConnString = "Server=postgrescrypto.postgres.database.azure.com;Database=postgres;Port=5432;User Id=cryptoadmin;Password=Admin$123;Ssl Mode=Allow;";
+                SearchResponseModel response = new SearchResponseModel();
+
+                NpgsqlConnection conn = new NpgsqlConnection(strConnString);
+
+                DataSet actualData = new DataSet();
+
+                try
+                {
+                    conn.Open();
+                    NpgsqlCommand comm = new NpgsqlCommand();
+                    comm.Connection = conn;
+                    comm.CommandType = CommandType.Text;
+                    //comm.CommandText = "select * from \"Crypto\".employee_full_details where email_id = "+"'anilkalwakuntla@wfhackathon2022.onmicrosoft.com'"+"";
+                    //comm.CommandText = "SELECT \"Crypto\".emplfulldetail('" + request.loggedinId + "')";
+                    comm.CommandText = "SELECT * from \"Crypto\".GetEmployeeDetailsByEmpID('" + request.Searchtxt + "');";
+
+                    NpgsqlDataAdapter nda = new NpgsqlDataAdapter(comm);
+                    nda.Fill(actualData);
+
+                    response.LoggedinId = actualData.Tables[0].Rows[0]["email_id"].ToString();
+                    response.EmployeeId = actualData.Tables[0].Rows[0]["emplid"].ToString();
+                    response.Firstname = actualData.Tables[0].Rows[0]["first_name"].ToString();
+                    response.Lastname = actualData.Tables[0].Rows[0]["last_name"].ToString();
+                    response.Fullname = actualData.Tables[0].Rows[0]["full_name"].ToString();
+                    response.Phone = actualData.Tables[0].Rows[0]["work_phone"].ToString();
+                    response.EmailAddress = actualData.Tables[0].Rows[0]["email_id"].ToString();
+                    response.Managername = actualData.Tables[0].Rows[0]["rep_to_mgr_name"].ToString();
+                    response.IsAdmin = (Boolean)actualData.Tables[0].Rows[0]["isadmin"];
+                    response.IsCustomPronunciationAvailable = false;
+                    comm.Dispose();
+
+
+                    return response;
+                }
+                catch (Exception ex)
+                {
+
+                    throw ex;
+                }
+                finally
+                {
+                    conn.Close();
+                }
+
+            }
         }
     }
 }

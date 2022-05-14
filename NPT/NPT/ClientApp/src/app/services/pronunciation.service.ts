@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { standardpronunciationRequestModel } from 'src/app/models/standardpronunciationmodel';
 import { pronunciationUserDetailRequestModel,pronunciationUserDetailResponseModel,saveCustomPronunciationRequestModel,saveCustomPronunciationResponseModel } from 'src/app/models/pronunciationuserDetailsmodel'
-
+import {getpronunciationRequestModel,getpronunciationResponseModel} from 'src/app/models/getpronunciationmodel'
 @Injectable()
 export class Pronunciationservice {
 
@@ -38,6 +38,13 @@ export class Pronunciationservice {
         var httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         let apiurl = this.url + 'api/pronunciation/SaveCustomPronunciation/v1'
         return this.httpClient.post<saveCustomPronunciationResponseModel>(apiurl, param, httpOptions);
+    }
+
+    getPronunciation(param:getpronunciationRequestModel):Observable<getpronunciationResponseModel>
+    {
+        var httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        let apiurl = this.url + 'api/pronunciation/GetPronunciation/v1'
+        return this.httpClient.post<getpronunciationResponseModel>(apiurl, param, httpOptions);
     }
 
 

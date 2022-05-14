@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Searchservice } from 'src/app/services/search.servics';
+import { Pronunciationservice } from 'src/app/services/pronunciation.service';
 import { searchRequestModel, searchResponseModel } from 'src/app/models/searchmodel'
 import { GlobalFunctions } from '../Global';
+import { getpronunciationRequestModel, getpronunciationResponseModel } from 'src/app/models/getpronunciationmodel';
 
 @Component({
   selector: 'app-search',
@@ -11,12 +13,18 @@ import { GlobalFunctions } from '../Global';
 export class SearchComponent implements OnInit {
   public issearchInfoHidden: boolean = false;
   public showSearchresult: boolean = false;
-  constructor(private searchservice: Searchservice) { }
+  constructor(private searchservice: Searchservice, private pronunciationservice: Pronunciationservice) { }
   searchrequest: searchRequestModel;
   searchresponse: searchResponseModel;
 
+  getpronunciationrequest: getpronunciationRequestModel;
+  getpronunciationresponse: getpronunciationResponseModel;
+
+  public loggedinUserID: string;
+
   ngOnInit(): void {
     this.initvariables();
+    this.loggedinUserID = sessionStorage.getItem('loggedUser');
   }
 
   search() {
@@ -29,9 +37,31 @@ export class SearchComponent implements OnInit {
         }
       });
     } else {
-        alert('Please enter a Valid text to search !')
+      alert('Please enter a Valid text to search !')
     }
   }
+
+  listenPronunciation() {
+
+    this.getpronunciationrequest = {
+      loggedinuserId: this.loggedinUserID,
+      employeeid: this.searchresponse.employeeId,
+      iscustomPronunciationAvailable: this.searchresponse.iscustomPronunciationAvailable,
+      isoverrideStandardPronunciation: this.searchresponse.isoverrideStandardPronunciation,
+      fullName: this.searchresponse.fullname,
+      country: '',
+      voicespeed: ''
+    }
+    this.pronunciationservice.getPronunciation(this.getpronunciationrequest).subscribe(res => {
+      console.log(res);
+      if (res != null && res != undefined) {
+
+        this.getpronunciationresponse = res;
+      }
+    });
+
+  }
+
 
   initvariables() {
 
@@ -53,7 +83,12 @@ export class SearchComponent implements OnInit {
       managername: '',
       isAdmin: false,
       iscustomPronunciationAvailable: false,
-      lastUpdatedDate: null
+      lastUpdatedDate: null,
+      isoverrideStandardPronunciation: false
+    }
+
+    this.getpronunciationresponse = {
+      success: false
     }
   }
 }

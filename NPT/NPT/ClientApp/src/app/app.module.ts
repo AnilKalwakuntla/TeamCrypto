@@ -6,10 +6,8 @@ import { RouterModule } from '@angular/router';
 import { MsalModule, MsalService, MSAL_INSTANCE } from '@azure/msal-angular';
 
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+
 import { MenuComponent } from 'src/app/menu/menu.component';
 import { LoginComponent } from 'src/app/login/login.component'
 import { MypronunciationComponent } from './mypronunciation/mypronunciation.component';
@@ -33,10 +31,7 @@ export function MSALInstanceFactory(): IPublicClientApplication {
 @NgModule({
   declarations: [
     AppComponent,
-    NavMenuComponent,
     HomeComponent,
-    CounterComponent,
-    FetchDataComponent,
     MenuComponent,
     LoginComponent,
     MyteamComponent,

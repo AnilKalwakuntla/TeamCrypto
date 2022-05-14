@@ -12,7 +12,7 @@ import { pronunciationUserDetailRequestModel, pronunciationUserDetailResponseMod
 })
 export class MypronunciationComponent implements OnInit {
   private record: any;
-  public recording = false;
+  public recording :boolean=false;
   public url: any;
   public error: any;
 

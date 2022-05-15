@@ -67,7 +67,7 @@ namespace NPT.DataAccess.Repository
            
             //Convert 64 Base data to Byte array
             var content = request.CustomPronunciationVoiceAsBase64.Split(',').ToList<string>();
-            byte[] customvoice = Convert.FromBase64String(content[1]);
+            //byte[] customvoice = Convert.FromBase64String(content[1]);
 
 
 
@@ -90,7 +90,7 @@ namespace NPT.DataAccess.Repository
                 //comm.CommandText = "select * from \"Crypto\".employee_full_details where email_id = "+"'anilkalwakuntla@wfhackathon2022.onmicrosoft.com'"+"";
                 //comm.CommandText = "SELECT \"Crypto\".emplfulldetail('" + request.loggedinId + "')";
                 comm.CommandText = "INSERT INTO \"Crypto\".name_pronunciation (fk_emplid, pronunciation, updated_date, is_delete) " +
-                                    "VALUES('2022001','" + customvoice + "','2022-05-15', false)";
+                                    "VALUES('2022007','" + content[1] + "','2022-05-15', false)";
                 comm.ExecuteNonQuery();
 
             }

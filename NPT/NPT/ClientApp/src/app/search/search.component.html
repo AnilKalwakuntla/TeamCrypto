@@ -17,7 +17,7 @@
     </div>
 </div>
 <br />
-<ng-container *ngIf="showSearchresult">
+<ng-container >
     <div class="card">
         <div class="card-header" (click)="issearchInfoHidden=!issearchInfoHidden">
             <i class="bi bi-people"></i><span>&nbsp;&nbsp;Search Results</span>
@@ -102,6 +102,8 @@
                                 class="bi bi-mic"></i>Listen</button>
                     </label>
                 </div>
+                <audio [src]="sanitize(audioSource)" id="audio" controls #audioTag>
+                </audio>
             </div>
         </div>
     </div>

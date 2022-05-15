@@ -13,6 +13,7 @@ using Npgsql;
 using NPT.DataAccess.Repository;
 using System.Data;
 using System.Media;
+using System.Text;
 
 namespace NPT.Controllers
 {
@@ -139,11 +140,11 @@ namespace NPT.Controllers
 
         [Route("api/pronunciation/GetPronunciation/v1")]
         [HttpPost]
-        public async Task<ActionResult> GetPronunciation([FromBody] GetPronunciationRequestmodel request)
+        public async Task<CustomPronunciationResponseModel> GetPronunciation([FromBody] GetPronunciationRequestmodel request)
         {
 
 
-            string strConnString = "Server=postgrescrypto.postgres.database.azure.com;Database=postgres;Port=5432;User Id=cryptoadmin;Password=Admin$123;";
+            string strConnString = "Server=postgrescrypto.postgres.database.azure.com;Port=5432;User Id=cryptoadmin;Password=Admin$123;Database=postgres;Ssl Mode=Allow;";
             //Ssl Mode = Allow;
             CustomPronunciationResponseModel response = new CustomPronunciationResponseModel();
 
@@ -153,7 +154,11 @@ namespace NPT.Controllers
 
             try
             {
-                conn.Open();
+                if(conn.State!=ConnectionState.Open)
+                {
+                    conn.Open();
+                }
+                
                 NpgsqlCommand comm = new NpgsqlCommand();
                 comm.Connection = conn;
                 comm.CommandType = CommandType.Text;
@@ -161,23 +166,23 @@ namespace NPT.Controllers
                 //comm.CommandText = "SELECT \"Crypto\".emplfulldetail('" + request.loggedinId + "')";
                 //comm.CommandText = "SELECT * from \"Crypto\".get_employee_details('" + request.EmployeeId + "');";
                 //comm.CommandText = "SELECT * from \"Crypto\".getcustompronunciationbyemplid('" + request.EmployeeId + "');";
-                comm.CommandText = "SELECT * from \"Crypto\".getcustompronunciationbyemplid('2022001');";
+                comm.CommandText = "SELECT * from \"Crypto\".getcustompronunciationbyemplid('" + request.EmployeeId + "');";
                 
 
                 NpgsqlDataAdapter nda = new NpgsqlDataAdapter(comm);
                 nda.Fill(actualData);
 
-                //response.LoggedinId = actualData.Tables[0].Rows[0]["email_id"].ToString();
-                response.custompronunciation = (byte[]) actualData.Tables[0].Rows[0]["pronunciation"];
+                var buffers = (byte[])actualData.Tables[0].Rows[0]["pronunciation"];
+                response.Custompronunciation = Encoding.UTF8.GetString(buffers);
+                response.Success = true;
 
-                var buffers = (byte[]) actualData.Tables[0].Rows[0]["pronunciation"];
 
-                MemoryStream s1 = new MemoryStream(buffers);
+                //MemoryStream s1 = new MemoryStream(buffers);
 
-                System.Media.SoundPlayer myPlayer1 = new System.Media.SoundPlayer(s1);
-                myPlayer1.Stream.Position = 0;
-                myPlayer1.Stream = s1;
-                myPlayer1.Play();
+                //System.Media.SoundPlayer myPlayer1 = new System.Media.SoundPlayer(s1);
+                //myPlayer1.Stream.Position = 0;
+                //myPlayer1.Stream = s1;
+                //myPlayer1.Play();
 
                 //System.IO.MemoryStream ms = new System.IO.MemoryStream(buffers);
                 //SoundPlayer sp = new SoundPlayer(ms);
@@ -210,8 +215,7 @@ namespace NPT.Controllers
 
                 comm.Dispose();
 
-
-                return null;
+                return response;
             }
             catch (Exception ex)
             {

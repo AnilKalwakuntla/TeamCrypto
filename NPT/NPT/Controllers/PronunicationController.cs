@@ -166,6 +166,21 @@ namespace NPT.Controllers
 
         }
 
+        [Route("api/pronunciation/DeleteCustomPronunciation/v1")]
+        [HttpPost]
+        public async Task<ActionResult> DeleteCustomPronunciation([FromBody] DeleteCustomPronunciationRequestModel request)
+        {
+            try
+            {
+                return Ok(await repo.DeleteCustomPronunciation(request));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
     }
 
 }

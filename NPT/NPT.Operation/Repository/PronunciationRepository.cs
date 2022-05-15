@@ -69,7 +69,40 @@ namespace NPT.DataAccess.Repository
             var content = request.CustomPronunciationVoiceAsBase64.Split(',').ToList<string>();
             byte[] customvoice = Convert.FromBase64String(content[1]);
 
+
+
             //insert into DB
+
+
+            string strConnString = "Server=postgrescrypto.postgres.database.azure.com;Database=postgres;Port=5432;User Id=cryptoadmin;Password=Admin$123;Ssl Mode=Allow;";
+    
+
+            NpgsqlConnection conn = new NpgsqlConnection(strConnString);
+
+            DataSet actualData = new DataSet();
+
+            try
+            {
+                conn.Open();
+                NpgsqlCommand comm = new NpgsqlCommand();
+                comm.Connection = conn;
+                comm.CommandType = CommandType.Text;
+                //comm.CommandText = "select * from \"Crypto\".employee_full_details where email_id = "+"'anilkalwakuntla@wfhackathon2022.onmicrosoft.com'"+"";
+                //comm.CommandText = "SELECT \"Crypto\".emplfulldetail('" + request.loggedinId + "')";
+                comm.CommandText = "INSERT INTO \"Crypto\".name_pronunciation (fk_emplid, pronunciation, updated_date, is_delete) " +
+                                    "VALUES('2022001','" + customvoice + "','2022-05-15', false)";
+                comm.ExecuteNonQuery();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
 
             response.Success = true;
             return response;

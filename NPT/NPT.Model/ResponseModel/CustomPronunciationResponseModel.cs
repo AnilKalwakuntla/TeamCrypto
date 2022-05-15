@@ -7,5 +7,7 @@ namespace NPT.Model.ResponseModel
     public class CustomPronunciationResponseModel
     {
         public string EmpId { get; set; }
+
+        public byte[] custompronunciation { get; set; }
     }
 }

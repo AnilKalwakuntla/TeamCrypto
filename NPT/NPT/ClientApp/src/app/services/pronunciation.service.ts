@@ -4,6 +4,8 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { standardpronunciationRequestModel } from 'src/app/models/standardpronunciationmodel';
 import { pronunciationUserDetailRequestModel,pronunciationUserDetailResponseModel,saveCustomPronunciationRequestModel,saveCustomPronunciationResponseModel } from 'src/app/models/pronunciationuserDetailsmodel'
 import {getpronunciationRequestModel,getpronunciationResponseModel} from 'src/app/models/getpronunciationmodel'
+import {deleterpronunciationRequestmodel,deleterpronunciationResponseModel} from 'src/app/models/deletepronunciationmodel';
+
 @Injectable()
 export class Pronunciationservice {
 
@@ -47,5 +49,11 @@ export class Pronunciationservice {
         return this.httpClient.post<getpronunciationResponseModel>(apiurl, param, httpOptions);
     }
 
+    deletePronunciation(param:deleterpronunciationRequestmodel):Observable<deleterpronunciationResponseModel>
+    {
+        var httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
+        let apiurl = this.url + 'api/pronunciation/DeleteCustomPronunciation/v1'
+        return this.httpClient.post<deleterpronunciationResponseModel>(apiurl, param, httpOptions);
+    }
 
 }

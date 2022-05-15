@@ -74,5 +74,14 @@ namespace NPT.DataAccess.Repository
             response.Success = true;
             return response;
         }
+
+        public async Task<DeleteCustomPronunciationResponseModel> DeleteCustomPronunciation(DeleteCustomPronunciationRequestModel request)
+        {
+            DeleteCustomPronunciationResponseModel response = new DeleteCustomPronunciationResponseModel();
+            
+            //Delete DB CALL
+            response.Success = true;
+            return response;
+        }
     }
 }

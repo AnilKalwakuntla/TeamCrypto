@@ -11,7 +11,8 @@ using System.IO;
 using NPT.DataAccess.Interfaces;
 using Npgsql;
 using NPT.DataAccess.Repository;
-
+using System.Data;
+using System.Media;
 
 namespace NPT.Controllers
 {
@@ -140,29 +141,141 @@ namespace NPT.Controllers
         [HttpPost]
         public async Task<ActionResult> GetPronunciation([FromBody] GetPronunciationRequestmodel request)
         {
+
+
+            string strConnString = "Server=postgrescrypto.postgres.database.azure.com;Database=postgres;Port=5432;User Id=cryptoadmin;Password=Admin$123;";
+            //Ssl Mode = Allow;
+            CustomPronunciationResponseModel response = new CustomPronunciationResponseModel();
+
+            NpgsqlConnection conn = new NpgsqlConnection(strConnString);
+
+            DataSet actualData = new DataSet();
+
             try
             {
-                GetPronunciationResponseModel response = new GetPronunciationResponseModel();
-                if(request!=null)
-                {
-                    if(request.IsCustomPronunciationAvailable && request.IsOverrideStandardPronunciation)
-                    {
-                        /* Retrieve Custom Pronunciation*/
-                    }
-                    else
-                    {
-                        /*Call Standard Pronunciation */
+                conn.Open();
+                NpgsqlCommand comm = new NpgsqlCommand();
+                comm.Connection = conn;
+                comm.CommandType = CommandType.Text;
+                //comm.CommandText = "select * from \"Crypto\".employee_full_details where email_id = "+"'anilkalwakuntla@wfhackathon2022.onmicrosoft.com'"+"";
+                //comm.CommandText = "SELECT \"Crypto\".emplfulldetail('" + request.loggedinId + "')";
+                //comm.CommandText = "SELECT * from \"Crypto\".get_employee_details('" + request.EmployeeId + "');";
+                //comm.CommandText = "SELECT * from \"Crypto\".getcustompronunciationbyemplid('" + request.EmployeeId + "');";
+                comm.CommandText = "SELECT * from \"Crypto\".getcustompronunciationbyemplid('2022001');";
+                
 
-                    }
-                }
+                NpgsqlDataAdapter nda = new NpgsqlDataAdapter(comm);
+                nda.Fill(actualData);
 
-                response.Success = true;
-                return Ok(response);
+                //response.LoggedinId = actualData.Tables[0].Rows[0]["email_id"].ToString();
+                response.custompronunciation = (byte[]) actualData.Tables[0].Rows[0]["pronunciation"];
+
+                var buffers = (byte[]) actualData.Tables[0].Rows[0]["pronunciation"];
+
+                MemoryStream s1 = new MemoryStream(buffers);
+
+                System.Media.SoundPlayer myPlayer1 = new System.Media.SoundPlayer(s1);
+                myPlayer1.Stream.Position = 0;
+                myPlayer1.Stream = s1;
+                myPlayer1.Play();
+
+                //System.IO.MemoryStream ms = new System.IO.MemoryStream(buffers);
+                //SoundPlayer sp = new SoundPlayer(ms);
+                //sp.Play();
+                //System.Media.SoundPlayer myPlayer = new System.Media.SoundPlayer(soundLocation: @"C:\Users\Anil Kalwakuntla\OneDrive\Desktop\Wav_868kb.wav");
+                //myPlayer.Play();
+
+
+                //byte[] audioBuffer = (byte[])actualData.Tables[0].Rows[0]["pronunciation"];
+                //using (MemoryStream ms = new MemoryStream(audioBuffer))
+                //{
+
+                //    SoundPlayer player = new System.Media.SoundPlayer(ms);
+                //    player.Play();
+                //}
+
+                //using (MemoryStream s = new MemoryStream(buffers))
+                //{
+
+                //    if (s.CanSeek) s.Seek(0, System.IO.SeekOrigin.Begin);
+                //    System.Media.SoundPlayer myPlayer = new System.Media.SoundPlayer(s);          
+
+                //    //myPlayer.Stream.Position = 0;
+                //    //myPlayer.Stream = null;    // Then we have to set stream to null 
+                //    //myPlayer.Stream = s;  // And set it again, to force it to be loaded again... 
+                //    myPlayer.Play();
+
+
+                //}
+
+                comm.Dispose();
+
+
+                return null;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+
+                throw ex;
             }
+            finally
+            {
+                conn.Close();
+            }
+            //try
+            //{
+            //    GetPronunciationResponseModel response = new GetPronunciationResponseModel();
+
+            //    var speechConfig = SpeechConfig.FromSubscription(YourSubscriptionKey, YourServiceRegion);
+            //    var speechSynthesizer = new SpeechSynthesizer(speechConfig);
+
+            //         speechConfig.SpeechSynthesisVoiceName = "en-US-JennyNeural";
+            //        //speechConfig.SpeechSynthesisVoiceName = request.Country;
+
+
+            //        using (speechSynthesizer = new SpeechSynthesizer(speechConfig))
+            //        {
+
+            //            var speechSynthesisResult = await speechSynthesizer.SpeakTextAsync(request.FullName);
+
+            //            // OutputSpeechSynthesisResult(speechSynthesisResult, requestModel.FullName);
+
+            //        }
+
+            //        //Custom Pronunciation
+
+
+
+
+
+            //        /*
+
+            //        fsfsf
+            //        */
+
+
+
+
+            //    //if(request!=null)
+            //    //{
+            //    //    if(request.IsCustomPronunciationAvailable && request.IsOverrideStandardPronunciation)
+            //    //    {
+            //    //        /* Retrieve Custom Pronunciation*/
+            //    //    }
+            //    //    else
+            //    //    {
+            //    //        /*Call Standard Pronunciation */
+
+            //    //    }
+            //    //}
+
+            //    response.Success = true;
+            //    return Ok(response);
+            //}
+            //catch (Exception)
+            //{
+            //    throw;
+            //}
 
         }
 

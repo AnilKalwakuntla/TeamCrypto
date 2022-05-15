@@ -47,7 +47,6 @@ namespace NPT.DataAccess.Repository
                     response.IsCustomPronunciationAvailable = false;                    
                     comm.Dispose();                    
 
-
                 return response;
             }
             catch (Exception ex)
@@ -64,6 +63,11 @@ namespace NPT.DataAccess.Repository
         public async Task<SaveCustomPronunciationResponseModel> SaveCustomPronunciation(SaveCustomPronunciationRequestModel request)
         {
             SaveCustomPronunciationResponseModel response = new SaveCustomPronunciationResponseModel();
+
+           
+            //Convert 64 Base data to Byte array
+            var content = request.CustomPronunciationVoiceAsBase64.Split(',').ToList<string>();
+            byte[] customvoice = Convert.FromBase64String(content[1]);
 
             //insert into DB
 

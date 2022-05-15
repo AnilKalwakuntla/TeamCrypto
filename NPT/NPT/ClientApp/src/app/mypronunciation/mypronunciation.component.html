@@ -172,7 +172,7 @@
                         </label>
                     </div>
                     <div class="col-4">
-                        <audio class="form-control">
+                        <audio  controls="" class="form-control">
                             <source [src]="sanitize(url)" type="audio/wav">
                         </audio>
                     </div>
@@ -270,7 +270,9 @@
                     <div class="col-sm-5" class="control-label">
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="checkbox" name="OverrideStandardPronunciationopt"
-                                id="OverrideStandardPronunciation" value="true" [(ngModel)]="selectedvoicespeed">
+                                id="OverrideStandardPronunciation" value="true" [checked]="OverrideStandardPronunciation"
+                                (change)="onOverrideStandardPronunciationoptChanged(OverrideStandardPronunciation.checked)"
+                                >
 
                         </div>
                     </div>
@@ -306,7 +308,7 @@
                         </label>
                     </div>
                     <div class="col-sm-8" class="control-label">
-                        <textarea class="form-control" rows="2" id="comment"></textarea>
+                        <textarea class="form-control" rows="2" maxlength="200" [(ngModel)]="txtcomments"></textarea>
                     </div>
                 </div>
                 <div class="modal-footer">

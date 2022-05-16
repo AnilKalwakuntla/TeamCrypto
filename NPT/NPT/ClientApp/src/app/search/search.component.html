@@ -57,7 +57,7 @@
                 </div>
                 <div class="col-4">
                     <label class="control-label">
-                         Lan ID:
+                        Lan ID:
                     </label>
                     <label class="control-label">
                         {{ searchresponse.lanid}}
@@ -87,16 +87,17 @@
                     </label>
                     <label class="control-label">
                         <input type="radio" id="custompronunciationtrue" [value]="true" disabled="true"
-                            [(ngModel)]="searchresponse.isAdmin">
+                            [(ngModel)]="searchresponse.isCustomPronunciationAvailable">
                         <label for="admintrue">Yes</label>
                         <input type="radio" id="custompronunciationfalse" [value]="false" disabled="true"
-                            [(ngModel)]="searchresponse.isAdmin">
+                            [(ngModel)]="searchresponse.isCustomPronunciationAvailable">
                         <label for="adminfalse">No</label>
                     </label>
                 </div>
             </div>
 
-            <ng-container *ngIf="!searchresponse.iscustomPronunciationAvailable">
+            <ng-container
+                *ngIf="!searchresponse.isCustomPronunciationAvailable || !searchresponse.overrideStandardPronunciation">
                 <div class="form-group row">
                     <div class="col-sm-10">
                         <label class="control-label">
@@ -124,22 +125,29 @@
                 </div>
             </ng-container>
             <div class="form-group row">
-                <div class="col-4">
+                <div class="col-4"
+                    *ngIf="!searchresponse.isCustomPronunciationAvailable || !searchresponse.overrideStandardPronunciation">
                     <label class="control-label">
                         Name Pronunciation :
                     </label>
                     <label class="control-label">
-                        &nbsp;&nbsp; <button class="btn btn-primary" (click)="listenPronunciation()"
-                            style="cursor: pointer;"> <i class="bi bi-mic"></i>Listen</button>
+                        &nbsp;&nbsp; <button class="btn btn-primary" (click)="listenStandardPronunciation()" [disabled]="(selectedcountry=='')?true:false"
+                            style="cursor: pointer;"> <i class="bi bi-mic"></i>Standard Pronunciation</button>
                     </label>
                 </div>
-                <div class="col-4" *ngIf="searchresponse.iscustomPronunciationAvailable">
+                <div class="col-2"
+                    *ngIf="searchresponse.isCustomPronunciationAvailable && searchresponse.overrideStandardPronunciation">
+                    <label class="control-label">
+                        Name Pronunciation :
+                    </label>
+                </div>
+                <div class="col-4" *ngIf="searchresponse.isCustomPronunciationAvailable">
                     <audio [src]="sanitize(audioSource)" id="audio" controls #audioTag class="form-control">
                     </audio>
                 </div>
             </div>
             <ng-container *ngIf="isadmin">
-                <div class="form-group row" *ngIf="!searchresponse.iscustomPronunciationAvailable">
+                <div class="form-group row" *ngIf="!searchresponse.isCustomPronunciationAvailable">
                     <div class="col-sm-10">
                         <label class="control-label"><b>
                                 Not Happy with the Standard Pronunciation,<a data-toggle="modal"
@@ -149,7 +157,7 @@
                         </label>
                     </div>
                 </div>
-                <div class="modal-footer" *ngIf="searchresponse.iscustomPronunciationAvailable">
+                <div class="modal-footer" *ngIf="searchresponse.isCustomPronunciationAvailable">
                     <button class="btn btn-info" style="cursor: pointer;" (click)="editPronunciation()">Edit</button>
                     <button class="btn btn-danger" style="cursor: pointer;"
                         (click)="deletePronunciation()">Delete</button>

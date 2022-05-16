@@ -68,7 +68,7 @@ export class MypronunciationComponent implements OnInit {
       createdby: '',
       comments: '',
       overrideStandardPronunciation: true,
-      lanid:''
+      lanid: ''
     }
     this.saveCustomPronunciationrequest =
     {
@@ -76,7 +76,7 @@ export class MypronunciationComponent implements OnInit {
       employeeId: '',
       overrideStandardPronunciation: null,
       customPronunciationVoiceAsBase64: '',
-      isupdate: null,
+      isupdate: false,
       comments: ''
 
     }
@@ -103,8 +103,8 @@ export class MypronunciationComponent implements OnInit {
       this.showloader = false;
       if (this.pronunciationUserDetailresponse.isCustomPronunciationAvailable) {
         this.ViewprocessRecording(this.pronunciationUserDetailresponse.customPronunciation);
+        this.saveCustomPronunciationrequest.customPronunciationVoiceAsBase64=this.pronunciationUserDetailresponse.customPronunciation;
       }
-
     });
   }
   getStandardPronunciation() {
@@ -129,16 +129,18 @@ export class MypronunciationComponent implements OnInit {
     this.saveCustomPronunciationrequest.loggedinId = this.loggedinUserID;
     this.saveCustomPronunciationrequest.employeeId = this.pronunciationUserDetailresponse.employeeId;
     this.saveCustomPronunciationrequest.overrideStandardPronunciation = this.OverrideStandardPronunciation;
-    this.saveCustomPronunciationrequest.isupdate = false;
+    if (!this.saveCustomPronunciationrequest.isupdate) {
+      this.saveCustomPronunciationrequest.isupdate = false;
+    }
     this.saveCustomPronunciationrequest.comments = this.txtcomments;
 
     this.pronunciationservice.SaveProunciationUserDetails(this.saveCustomPronunciationrequest).subscribe(res => {
-      
+
       this.saveCustomPronunciationresponse = res;
       jQuery("#exampleModalCenter").modal('hide');
       this.showloader = true;
       this.getProunciationUserDetails();
-
+      this.url = '';
     });
   }
 
@@ -150,7 +152,8 @@ export class MypronunciationComponent implements OnInit {
       }
       this.pronunciationservice.deletePronunciation(this.deleterpronunciationrrequest).subscribe(res => {
         this.deleterpronunciationresponse = res;
-
+        this.showloader = true;
+        this.getProunciationUserDetails();
       });
     }
   }

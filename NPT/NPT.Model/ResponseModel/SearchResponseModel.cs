@@ -15,7 +15,7 @@ namespace NPT.Model.ResponseModel
         public string Phone { get; set; }
         public string Managername { get; set; }
         public bool IsCustomPronunciationAvailable { get; set; }
-        public bool IsOverrideStandardPronunciation { get; set; }
+        public string CustomPronunciation { get; set; }
         public DateTime? LastUpdatedDate { get; set; }
         public bool IsAdmin { get; set; }
         public bool? OverrideStandardPronunciation { get; set; }

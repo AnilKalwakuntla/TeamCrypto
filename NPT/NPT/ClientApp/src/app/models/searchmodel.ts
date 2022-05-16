@@ -15,7 +15,7 @@ export interface searchResponseModel
     phone:string,
     managername:string,
     isAdmin:boolean,
-    iscustomPronunciationAvailable:boolean,
+    isCustomPronunciationAvailable:boolean,
     lastUpdatedDate:Date,
     customPronunciation: string,
     createdby:string,

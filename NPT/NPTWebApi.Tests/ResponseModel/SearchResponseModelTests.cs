@@ -148,16 +148,16 @@ namespace NPTWebApi.Tests.ResponseModel
 
         }
         [Fact]
-        public void CheckTypeforResponseModel_IsOverrideStandardPronunciation()
+        public void CheckTypeforResponseModel_CustomPronunciation()
         {
             //Arrange
             var searchresponsemodel = this.CreateSearchResponseModelTests();
 
             //Act
-            searchresponsemodel.IsOverrideStandardPronunciation = true;
+            searchresponsemodel.OverrideStandardPronunciation = true;
 
             //Assert
-            Assert.IsType<bool>(searchresponsemodel.IsOverrideStandardPronunciation);
+            Assert.IsType<bool>(searchresponsemodel.OverrideStandardPronunciation);
             this.mockRepository.Verify();
 
         }

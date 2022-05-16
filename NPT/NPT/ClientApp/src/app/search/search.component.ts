@@ -9,7 +9,7 @@ import * as RecordRTC from 'recordrtc';
 declare var jQuery: any;
 import { saveCustomPronunciationRequestModel, saveCustomPronunciationResponseModel } from 'src/app/models/pronunciationuserDetailsmodel'
 import { deleterpronunciationRequestmodel, deleterpronunciationResponseModel } from 'src/app/models/deletepronunciationmodel';
-
+import { standardpronunciationRequestModel } from 'src/app/models/standardpronunciationmodel';
 @Component({
   selector: 'app-search',
   templateUrl: './search.component.html',
@@ -34,7 +34,7 @@ export class SearchComponent implements OnInit {
   public recording: boolean = false;
   public url: any;
   public error: any;
-  public selectedcountry:string="";
+  public selectedcountry: string = "";
 
   searchrequest: searchRequestModel;
   searchresponse: searchResponseModel;
@@ -48,9 +48,10 @@ export class SearchComponent implements OnInit {
   deleterpronunciationrrequest: deleterpronunciationRequestmodel;
   deleterpronunciationresponse: deleterpronunciationResponseModel;
 
+  standardpronunciationrequest: standardpronunciationRequestModel;
 
   ngOnInit(): void {
-    
+
     this.loggedinUserID = sessionStorage.getItem('loggedUser');
     this.isadmin = (sessionStorage.getItem('isadmin') == "true") ? true : false;
     this.initvariables();
@@ -61,7 +62,12 @@ export class SearchComponent implements OnInit {
       this.searchservice.SearchPronunciation(this.searchrequest).subscribe(res => {
         if (res != null && res != undefined) {
           this.searchresponse = res;
+          console.log(this.searchresponse);
           this.showSearchresult = true;
+          if (res.isCustomPronunciationAvailable && (res.overrideStandardPronunciation || this.isadmin)) {
+            this.ViewprocessRecording(this.searchresponse.customPronunciation);
+            this.saveCustomPronunciationrequest.customPronunciationVoiceAsBase64=this.searchresponse.customPronunciation;
+          }
         }
       });
     } else {
@@ -71,24 +77,31 @@ export class SearchComponent implements OnInit {
   sanitize(url: string) {
     return this.domSanitizer.bypassSecurityTrustUrl(url);
   }
-  listenPronunciation() {
-
-    this.getpronunciationrequest = {
-      loggedinuserId: this.loggedinUserID,
-      employeeid: this.searchresponse.employeeId,
-      iscustomPronunciationAvailable: this.searchresponse.iscustomPronunciationAvailable,
-      isoverrideStandardPronunciation: this.searchresponse.overrideStandardPronunciation,
+  listenStandardPronunciation() {
+    this.standardpronunciationrequest =
+    {
+      employeeID: this.searchresponse.employeeId,
       fullName: this.searchresponse.fullname,
       country: this.selectedcountry,
-      voicespeed: 'slow'
+      voicespeed: "Slow"
     }
-    this.pronunciationservice.getPronunciation(this.getpronunciationrequest).subscribe(res => {
-      if (res != null && res != undefined) {
-        console.log(res);
-        this.getpronunciationresponse = res;
-        this.ViewprocessRecording(this.getpronunciationresponse.custompronunciation);
-      }
-    });
+    this.pronunciationservice.GetStandardPronunciation(this.standardpronunciationrequest);
+    // this.getpronunciationrequest = {
+    //   loggedinuserId: this.loggedinUserID,
+    //   employeeid: this.searchresponse.employeeId,
+    //   iscustomPronunciationAvailable: this.searchresponse.isCustomPronunciationAvailable,
+    //   isoverrideStandardPronunciation: this.searchresponse.isCustomPronunciationAvailable,
+    //   fullName: this.searchresponse.fullname,
+    //   country: this.selectedcountry,
+    //   voicespeed: 'slow'
+    // }
+    // this.pronunciationservice.getPronunciation(this.getpronunciationrequest).subscribe(res => {
+    //   if (res != null && res != undefined) {
+    //     console.log(res);
+    //     this.getpronunciationresponse = res;
+    //     this.ViewprocessRecording(this.getpronunciationresponse.custompronunciation);
+    //   }
+    // });
   }
 
   saveProunciationUserDetails() {
@@ -97,14 +110,21 @@ export class SearchComponent implements OnInit {
     this.saveCustomPronunciationrequest.loggedinId = this.loggedinUserID;
     this.saveCustomPronunciationrequest.employeeId = this.searchresponse.employeeId;
     this.saveCustomPronunciationrequest.overrideStandardPronunciation = this.OverrideStandardPronunciation;
-    this.saveCustomPronunciationrequest.isupdate = false;
-    this.saveCustomPronunciationrequest.comments = this.txtcomments;
+    if (this.saveCustomPronunciationrequest.isupdate != null) {
+      if (this.saveCustomPronunciationrequest.isupdate)
+        this.saveCustomPronunciationrequest.isupdate = true;
+      else
+        this.saveCustomPronunciationrequest.isupdate = false;
+    } else
+      this.saveCustomPronunciationrequest.isupdate = false;
 
+    this.saveCustomPronunciationrequest.comments = this.txtcomments;
     this.pronunciationservice.SaveProunciationUserDetails(this.saveCustomPronunciationrequest).subscribe(res => {
-      
+
       this.saveCustomPronunciationresponse = res;
       jQuery("#exampleModalCenter").modal('hide');
       this.showloader = true;
+      this.url = '';
       this.search();
 
     });
@@ -117,7 +137,8 @@ export class SearchComponent implements OnInit {
       }
       this.pronunciationservice.deletePronunciation(this.deleterpronunciationrrequest).subscribe(res => {
         this.deleterpronunciationresponse = res;
-
+        alert('Successfully Deleted !');
+        this.showSearchresult=false;
       });
     }
   }
@@ -168,13 +189,13 @@ export class SearchComponent implements OnInit {
       phone: '',
       managername: '',
       isAdmin: false,
-      iscustomPronunciationAvailable: false,
+      isCustomPronunciationAvailable: false,
       lastUpdatedDate: null,
       overrideStandardPronunciation: false,
-      customPronunciation:'',
-      createdby:'',
-      comments:'',
-      lanid:''
+      customPronunciation: '',
+      createdby: '',
+      comments: '',
+      lanid: ''
     }
 
     this.getpronunciationresponse = {
@@ -248,7 +269,7 @@ export class SearchComponent implements OnInit {
     var reader = new FileReader();
     reader.readAsDataURL(blob);
     reader.onloadend = () => {
-      //this.saveCustomPronunciationrequest.customPronunciationVoiceAsBase64 = reader.result.toString();
+      this.saveCustomPronunciationrequest.customPronunciationVoiceAsBase64 = reader.result.toString();
     };
   }
   /**

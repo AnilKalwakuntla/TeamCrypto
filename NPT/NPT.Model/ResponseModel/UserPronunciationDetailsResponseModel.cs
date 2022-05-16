@@ -23,5 +23,7 @@ namespace NPT.Model.ResponseModel
         public string Comments { get; set; }
         public string Createdby { get; set; }
 
+        public string lanid { get; set; }
+
     }
 }

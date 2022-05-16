@@ -30,7 +30,7 @@ namespace NPT.DataAccess.Repository
                     comm.CommandType = CommandType.Text;
                     //comm.CommandText = "select * from \"Crypto\".employee_full_details where email_id = "+"'anilkalwakuntla@wfhackathon2022.onmicrosoft.com'"+"";
                     //comm.CommandText = "SELECT \"Crypto\".emplfulldetail('" + request.loggedinId + "')";
-                    comm.CommandText = "SELECT * from \"Crypto\".get_employee_details('" + request.loggedinId + "');";                  
+                    comm.CommandText = "SELECT * from \"Crypto\".getemployeedetailsbyemailid('" + request.loggedinId + "');";                  
 
                     NpgsqlDataAdapter nda = new NpgsqlDataAdapter(comm);
                     nda.Fill(actualData);
@@ -44,8 +44,12 @@ namespace NPT.DataAccess.Repository
                     response.EmailAddress = actualData.Tables[0].Rows[0]["email_id"].ToString();
                     response.Managername = actualData.Tables[0].Rows[0]["rep_to_mgr_name"].ToString();
                     response.IsAdmin = (Boolean)actualData.Tables[0].Rows[0]["isadmin"];
-                    response.IsCustomPronunciationAvailable = false;                    
-                    comm.Dispose();                    
+                    response.IsCustomPronunciationAvailable = false;
+                    var buffers = (byte[])actualData.Tables[0].Rows[0]["pronunciation"];
+                    response.Custompronunciation = Encoding.UTF8.GetString(buffers);
+
+
+                comm.Dispose();                    
 
                 return response;
             }
@@ -91,7 +95,13 @@ namespace NPT.DataAccess.Repository
                 //comm.CommandText = "SELECT \"Crypto\".emplfulldetail('" + request.loggedinId + "')";
                 comm.CommandText = "INSERT INTO \"Crypto\".name_pronunciation (fk_emplid, pronunciation, updated_date, is_delete) " +
                                     "VALUES('2022007','" + content[1] + "','2022-05-15', false)";
+
+
+                comm.CommandText = "CALL \"Crypto\".savecustompronunciation('" + request.EmployeeId + "','" + content + "', 'false', 'true', 'false', 'INSERT')";
                 comm.ExecuteNonQuery();
+
+
+               
 
             }
             catch (Exception ex)

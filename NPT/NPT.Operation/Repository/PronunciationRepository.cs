@@ -94,7 +94,7 @@ namespace NPT.DataAccess.Repository
                 }
                 else
                 {
-                    transType = "UPDTAE";
+                    transType = "UPDATE";
                 }
 
                 comm.CommandText = RepoConstants.SaveCustomPronunciation + "('" + request.EmployeeId + "','" + content[1] + "', 'false', '" + request.OverrideStandardPronunciation + "','false','" + transType + "', '" + request.EmployeeId + "','" + request.Comments + "' )";
@@ -166,7 +166,7 @@ namespace NPT.DataAccess.Repository
                 comm.Connection = conn;
                 comm.CommandType = CommandType.Text;
 
-                comm.CommandText = RepoConstants.SaveCustomPronunciation + "('" + request.DeletingRecordEmployeeId + "','','','DELETE', '','' )";
+                comm.CommandText = RepoConstants.SaveCustomPronunciation + "('" + request.DeletingRecordEmployeeId + "','','','','','DELETE')";
                 comm.ExecuteNonQuery();
             }
             catch (Exception ex)

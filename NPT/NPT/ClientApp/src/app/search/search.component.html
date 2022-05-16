@@ -97,7 +97,7 @@
             </div>
 
             <ng-container
-                *ngIf="!searchresponse.isCustomPronunciationAvailable || !searchresponse.overrideStandardPronunciation">
+                *ngIf="!searchresponse.isCustomPronunciationAvailable || (!searchresponse.overrideStandardPronunciation && !isadmin)">
                 <div class="form-group row">
                     <div class="col-sm-10">
                         <label class="control-label">
@@ -126,7 +126,7 @@
             </ng-container>
             <div class="form-group row">
                 <div class="col-4"
-                    *ngIf="!searchresponse.isCustomPronunciationAvailable || !searchresponse.overrideStandardPronunciation">
+                    *ngIf="!searchresponse.isCustomPronunciationAvailable || (!searchresponse.overrideStandardPronunciation && !isadmin)">
                     <label class="control-label">
                         Name Pronunciation :
                     </label>
@@ -136,12 +136,12 @@
                     </label>
                 </div>
                 <div class="col-2"
-                    *ngIf="searchresponse.isCustomPronunciationAvailable && searchresponse.overrideStandardPronunciation">
+                    *ngIf="searchresponse.isCustomPronunciationAvailable && (searchresponse.overrideStandardPronunciation || isadmin)">
                     <label class="control-label">
                         Name Pronunciation :
                     </label>
                 </div>
-                <div class="col-4" *ngIf="searchresponse.isCustomPronunciationAvailable">
+                <div class="col-4" *ngIf="searchresponse.isCustomPronunciationAvailable && (searchresponse.overrideStandardPronunciation || isadmin)">
                     <audio [src]="sanitize(audioSource)" id="audio" controls #audioTag class="form-control">
                     </audio>
                 </div>

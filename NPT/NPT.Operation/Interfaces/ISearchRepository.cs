@@ -9,6 +9,6 @@ namespace NPT.DataAccess.Interfaces
 {
     public interface ISearchRepository
     {
-          Task<SearchResponseModel> SearchPronunciationDetails(SearchRequestModel request);
+          Task<SearchResponseModel> SearchPronunciationDetails(SearchRequestModel request,string Conn);
     }
 }

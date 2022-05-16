@@ -18,7 +18,7 @@ export interface pronunciationUserDetailResponseModel {
     createdby:string,
     overrideStandardPronunciation:boolean,
     comments:string,
-    lanID:string
+    lanid:string
 };
 
 export interface saveCustomPronunciationRequestModel {

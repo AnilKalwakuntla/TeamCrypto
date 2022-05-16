@@ -8,18 +8,17 @@ using NPT.Model.ResponseModel;
 using NPT.DataAccess.Interfaces;
 using Npgsql;
 using System.Data;
+using NPT.DataAccess.Constants;
 
 namespace NPT.DataAccess.Repository
 {
     public class PronunciationRepository : IPronunciationRepository
     {
-        public async Task<UserPronunciationDetailsResponseModel> GetUserPronunciationDetails(UserPronunciationDetailsRequestModel request)
+        public async Task<UserPronunciationDetailsResponseModel> GetUserPronunciationDetails(UserPronunciationDetailsRequestModel request, string strConnString)
         {
-            string strConnString = "Server=postgrescrypto.postgres.database.azure.com;Database=postgres;Port=5432;User Id=cryptoadmin;Password=Admin$123;Ssl Mode=Allow;";
+
             UserPronunciationDetailsResponseModel response = new UserPronunciationDetailsResponseModel();
-
             NpgsqlConnection conn = new NpgsqlConnection(strConnString);
-
             DataSet actualData = new DataSet();
 
             try
@@ -28,7 +27,7 @@ namespace NPT.DataAccess.Repository
                 NpgsqlCommand comm = new NpgsqlCommand();
                 comm.Connection = conn;
                 comm.CommandType = CommandType.Text;
-                comm.CommandText = "SELECT * from \"Crypto\".getemployeedetailsbyemailid('" + request.loggedinId + "');";
+                comm.CommandText = RepoConstants.GetEmployeeDetailsByEmailID + "('" + request.loggedinId + "');";
 
                 NpgsqlDataAdapter nda = new NpgsqlDataAdapter(comm);
                 nda.Fill(actualData);
@@ -43,19 +42,20 @@ namespace NPT.DataAccess.Repository
                 response.Managername = actualData.Tables[0].Rows[0]["rep_to_mgr_name"].ToString();
                 response.IsAdmin = (Boolean)actualData.Tables[0].Rows[0]["isadmin"];
                 response.lanid = actualData.Tables[0].Rows[0]["elid"].ToString();
-                if (!(actualData.Tables[0].Rows[0]["updated_date"] is DBNull))
-                response.LastUpdatedDate = Convert.ToDateTime(actualData.Tables[0].Rows[0]["updated_date"]);
-                response.Createdby = actualData.Tables[0].Rows[0]["createdby"].ToString();
-                response.Comments = actualData.Tables[0].Rows[0]["createdby"].ToString();
 
                 response.IsCustomPronunciationAvailable = (string.IsNullOrEmpty(Convert.ToString(actualData.Tables[0].Rows[0]["pronunciation"]))) ? false : true;
                 if (response.IsCustomPronunciationAvailable)
                 {
+
                     var buffers = (byte[])actualData.Tables[0].Rows[0]["pronunciation"];
                     response.CustomPronunciation = Encoding.UTF8.GetString(buffers);
                     response.OverrideStandardPronunciation = (Boolean)actualData.Tables[0].Rows[0]["overridestandardpronunciation"];
+                    if (!(actualData.Tables[0].Rows[0]["updated_date"] is DBNull))
+                        response.LastUpdatedDate = Convert.ToDateTime(actualData.Tables[0].Rows[0]["updated_date"]);
+                    response.Createdby = actualData.Tables[0].Rows[0]["createdby"].ToString();
+                    response.Comments = actualData.Tables[0].Rows[0]["comments"].ToString();
                 }
-              
+
 
                 comm.Dispose();
 
@@ -72,51 +72,32 @@ namespace NPT.DataAccess.Repository
             }
         }
 
-        public async Task<SaveCustomPronunciationResponseModel> SaveCustomPronunciation(SaveCustomPronunciationRequestModel request)
+        public async Task<SaveCustomPronunciationResponseModel> SaveCustomPronunciation(SaveCustomPronunciationRequestModel request, string strConnString)
         {
             SaveCustomPronunciationResponseModel response = new SaveCustomPronunciationResponseModel();
-
 
             //Convert 64 Base data to Byte array
             var content = request.CustomPronunciationVoiceAsBase64.Split(',').ToList<string>();
 
             //insert into DB
-
-
-            string strConnString = "Server=postgrescrypto.postgres.database.azure.com;Database=postgres;Port=5432;User Id=cryptoadmin;Password=Admin$123;Ssl Mode=Allow;";
-
-
             NpgsqlConnection conn = new NpgsqlConnection(strConnString);
-
-            
-
             try
             {
                 string transType = string.Empty;
-
-
                 conn.Open();
                 NpgsqlCommand comm = new NpgsqlCommand();
                 comm.Connection = conn;
                 comm.CommandType = CommandType.Text;
-                //comm.CommandText = "select * from \"Crypto\".employee_full_details where email_id = "+"'anilkalwakuntla@wfhackathon2022.onmicrosoft.com'"+"";
-                //comm.CommandText = "SELECT \"Crypto\".emplfulldetail('" + request.loggedinId + "')";
-                //comm.CommandText = "INSERT INTO \"Crypto\".name_pronunciation (fk_emplid, pronunciation, updated_date, is_delete) " +
-                 //                   "VALUES('2022007','" + content[1] + "','2022-05-15', false)";
-                //emplid, customvoice, isdel(for is delete flag), overridestnd (for overridestandardpronunciation flag), optout (),operation (INSERT/UPDATE/DELETE), createdbyparam), commentspara)
-
                 if (request.Isupdate == false)
                 {
                     transType = "INSERT";
-
                 }
                 else
                 {
                     transType = "UPDTAE";
                 }
-               
-                
-                comm.CommandText = "CALL \"Crypto\".savecustompronunciation('" + request.EmployeeId + "','" + content[1] + "', 'false', '" + request.OverrideStandardPronunciation + "','false','" + transType + "', '" + request.EmployeeId + "','" + request.Comments + "' )";
+
+                comm.CommandText = RepoConstants.SaveCustomPronunciation + "('" + request.EmployeeId + "','" + content[1] + "', 'false', '" + request.OverrideStandardPronunciation + "','false','" + transType + "', '" + request.EmployeeId + "','" + request.Comments + "' )";
                 comm.ExecuteNonQuery();
 
             }
@@ -134,30 +115,59 @@ namespace NPT.DataAccess.Repository
             return response;
         }
 
-        public async Task<DeleteCustomPronunciationResponseModel> DeleteCustomPronunciation(DeleteCustomPronunciationRequestModel request)
+        public async Task<CustomPronunciationResponseModel> GetPronunciation(GetPronunciationRequestmodel request, string strConnString)
+        {
+            CustomPronunciationResponseModel response = new CustomPronunciationResponseModel();
+            NpgsqlConnection conn = new NpgsqlConnection(strConnString);
+            DataSet actualData = new DataSet();
+            try
+            {
+                if (conn.State != ConnectionState.Open)
+                {
+                    conn.Open();
+                }
+
+                NpgsqlCommand comm = new NpgsqlCommand();
+                comm.Connection = conn;
+                comm.CommandType = CommandType.Text;
+                comm.CommandText = RepoConstants.GetCustomPronunciationByEmplid + "('" + request.EmployeeId + "');";
+
+
+                NpgsqlDataAdapter nda = new NpgsqlDataAdapter(comm);
+                nda.Fill(actualData);
+
+                var buffers = (byte[])actualData.Tables[0].Rows[0]["pronunciation"];
+                response.Custompronunciation = Encoding.UTF8.GetString(buffers);
+                response.Success = true;
+
+                comm.Dispose();
+                return response;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public async Task<DeleteCustomPronunciationResponseModel> DeleteCustomPronunciation(DeleteCustomPronunciationRequestModel request, string strConnString)
         {
             DeleteCustomPronunciationResponseModel response = new DeleteCustomPronunciationResponseModel();
-
-
-            string strConnString = "Server=postgrescrypto.postgres.database.azure.com;Database=postgres;Port=5432;User Id=cryptoadmin;Password=Admin$123;Ssl Mode=Allow;";
-
-
             NpgsqlConnection conn = new NpgsqlConnection(strConnString);
-
             try
             {
                 string transType = string.Empty;
-
-
                 conn.Open();
                 NpgsqlCommand comm = new NpgsqlCommand();
                 comm.Connection = conn;
                 comm.CommandType = CommandType.Text;
 
-                //call "Crypto".savecustompronunciation('1818181','',true,true,false,'UPDATE','testcreateUPDTEdby','UPDATE test comments from user here to test the same in db for now here rathna testing sp');
-                comm.CommandText = "CALL \"Crypto\".savecustompronunciation('" + request.LoggedinUserId + "','','','DELETE', '','' )";
+                comm.CommandText = RepoConstants.SaveCustomPronunciation + "('" + request.LoggedinUserId + "','','','DELETE', '','' )";
                 comm.ExecuteNonQuery();
-
             }
             catch (Exception ex)
             {
@@ -169,10 +179,9 @@ namespace NPT.DataAccess.Repository
                 conn.Close();
             }
 
-
-            //Delete DB CALL
             response.Success = true;
             return response;
         }
+
     }
 }

@@ -17,7 +17,10 @@ export interface searchResponseModel
     isAdmin:boolean,
     iscustomPronunciationAvailable:boolean,
     lastUpdatedDate:Date,
-    isoverrideStandardPronunciation:boolean,
-    
+    customPronunciation: string,
+    createdby:string,
+    overrideStandardPronunciation:boolean,
+    comments:string,
+    lanid:string
     //CustomPronunciation:BinaryType[]
 };

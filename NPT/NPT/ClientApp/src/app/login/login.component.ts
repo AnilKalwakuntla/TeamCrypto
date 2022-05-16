@@ -19,8 +19,7 @@ export class LoginComponent implements OnInit {
   }
   login() {
     this.msalService.loginPopup().subscribe((Response: AuthenticationResult) => {
-      this.msalService.instance.setActiveAccount(Response.account)
-      console.log(Response.account.username);
+      this.msalService.instance.setActiveAccount(Response.account);
       if (!GlobalFunctions.IsNullorEmpty(Response.account.username)) {
         sessionStorage.setItem('loggedUser', Response.account.username);
         this.router.navigate(["/home"]);

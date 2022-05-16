@@ -7,15 +7,15 @@ using NPT.Model.RequestModel;
 using NPT.Model.ResponseModel;
 using Npgsql;
 using System.Data;
+using NPT.DataAccess.Constants;
 
 namespace NPT.DataAccess.Repository
 {
     public class SearchRepository : ISearchRepository
     {
-       public async Task<SearchResponseModel> SearchPronunciationDetails(SearchRequestModel request)
+        public async Task<SearchResponseModel> SearchPronunciationDetails(SearchRequestModel request, string strConnString)
         {
             {
-                string strConnString = "Server=postgrescrypto.postgres.database.azure.com;Database=postgres;Port=5432;User Id=cryptoadmin;Password=Admin$123;Ssl Mode=Allow;";
                 SearchResponseModel response = new SearchResponseModel();
 
                 NpgsqlConnection conn = new NpgsqlConnection(strConnString);
@@ -28,9 +28,7 @@ namespace NPT.DataAccess.Repository
                     NpgsqlCommand comm = new NpgsqlCommand();
                     comm.Connection = conn;
                     comm.CommandType = CommandType.Text;
-                    //comm.CommandText = "select * from \"Crypto\".employee_full_details where email_id = "+"'anilkalwakuntla@wfhackathon2022.onmicrosoft.com'"+"";
-                    //comm.CommandText = "SELECT \"Crypto\".emplfulldetail('" + request.loggedinId + "')";
-                    comm.CommandText = "SELECT * from \"Crypto\".GetEmployeeDetailsByEmpID('" + request.Searchtxt + "');";
+                    comm.CommandText = RepoConstants.GetEmployeeDetailsByEmpID + "('" + request.Searchtxt + "');";
 
                     NpgsqlDataAdapter nda = new NpgsqlDataAdapter(comm);
                     nda.Fill(actualData);

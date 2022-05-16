@@ -59,7 +59,6 @@ export class SearchComponent implements OnInit {
   search() {
     if (!GlobalFunctions.IsNullorEmpty(this.searchrequest.searchtxt)) {
       this.searchservice.SearchPronunciation(this.searchrequest).subscribe(res => {
-        console.log(res);
         if (res != null && res != undefined) {
           this.searchresponse = res;
           this.showSearchresult = true;
@@ -78,7 +77,7 @@ export class SearchComponent implements OnInit {
       loggedinuserId: this.loggedinUserID,
       employeeid: this.searchresponse.employeeId,
       iscustomPronunciationAvailable: this.searchresponse.iscustomPronunciationAvailable,
-      isoverrideStandardPronunciation: this.searchresponse.isoverrideStandardPronunciation,
+      isoverrideStandardPronunciation: this.searchresponse.overrideStandardPronunciation,
       fullName: this.searchresponse.fullname,
       country: this.selectedcountry,
       voicespeed: 'slow'
@@ -101,9 +100,8 @@ export class SearchComponent implements OnInit {
     this.saveCustomPronunciationrequest.isupdate = false;
     this.saveCustomPronunciationrequest.comments = this.txtcomments;
 
-    console.log(this.saveCustomPronunciationrequest);
     this.pronunciationservice.SaveProunciationUserDetails(this.saveCustomPronunciationrequest).subscribe(res => {
-      console.log(res);
+      
       this.saveCustomPronunciationresponse = res;
       jQuery("#exampleModalCenter").modal('hide');
       this.showloader = true;
@@ -117,9 +115,7 @@ export class SearchComponent implements OnInit {
         deletingRecordEmployeeId: this.searchresponse.employeeId,
         loggedinUserId: this.loggedinUserID
       }
-      console.log(this.deleterpronunciationrrequest);
       this.pronunciationservice.deletePronunciation(this.deleterpronunciationrrequest).subscribe(res => {
-        console.log(res);
         this.deleterpronunciationresponse = res;
 
       });
@@ -128,7 +124,7 @@ export class SearchComponent implements OnInit {
 
   editPronunciation() {
     this.txtcomments = this.getpronunciationresponse.comments;
-    this.OverrideStandardPronunciation = this.searchresponse.isoverrideStandardPronunciation;
+    this.OverrideStandardPronunciation = this.searchresponse.overrideStandardPronunciation;
     this.saveCustomPronunciationrequest.isupdate = true;
     jQuery("#exampleModalCenter").modal('show');
   }
@@ -136,11 +132,9 @@ export class SearchComponent implements OnInit {
   ViewprocessRecording(byte: any) {
 
     let binary = this.convertDataURIToBinary(byte);
-    console.log(binary);
     let blob = new Blob([binary], { type: 'audio/wav' });
     let blobUrl = URL.createObjectURL(blob);
     this.audioSource = blobUrl;
-    console.log(this.audioSource);
   }
 
 
@@ -176,7 +170,11 @@ export class SearchComponent implements OnInit {
       isAdmin: false,
       iscustomPronunciationAvailable: false,
       lastUpdatedDate: null,
-      isoverrideStandardPronunciation: false
+      overrideStandardPronunciation: false,
+      customPronunciation:'',
+      createdby:'',
+      comments:'',
+      lanid:''
     }
 
     this.getpronunciationresponse = {

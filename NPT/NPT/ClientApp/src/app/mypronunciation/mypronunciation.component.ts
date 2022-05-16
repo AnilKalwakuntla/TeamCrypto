@@ -68,7 +68,7 @@ export class MypronunciationComponent implements OnInit {
       createdby: '',
       comments: '',
       overrideStandardPronunciation: true,
-      lanID:''
+      lanid:''
     }
     this.saveCustomPronunciationrequest =
     {
@@ -100,7 +100,6 @@ export class MypronunciationComponent implements OnInit {
     this.pronunciationservice.GetProunciationUserDetails(this.pronunciationUserDetailrequest).subscribe(res => {
       this.pronunciationUserDetailresponse = res;
       sessionStorage.setItem('isadmin', (this.pronunciationUserDetailresponse.isAdmin) ? "true" : "false");
-      console.log(this.pronunciationUserDetailresponse);
       this.showloader = false;
       if (this.pronunciationUserDetailresponse.isCustomPronunciationAvailable) {
         this.ViewprocessRecording(this.pronunciationUserDetailresponse.customPronunciation);
@@ -116,7 +115,6 @@ export class MypronunciationComponent implements OnInit {
       country: this.selectedcountry,
       voicespeed: this.selectedvoicespeed
     }
-    console.log(this.standardpronunciationrequest);
     this.standardpronunciation = this.pronunciationservice.GetStandardPronunciation(this.standardpronunciationrequest);
   }
   editPronunciation() {
@@ -134,9 +132,8 @@ export class MypronunciationComponent implements OnInit {
     this.saveCustomPronunciationrequest.isupdate = false;
     this.saveCustomPronunciationrequest.comments = this.txtcomments;
 
-    console.log(this.saveCustomPronunciationrequest);
     this.pronunciationservice.SaveProunciationUserDetails(this.saveCustomPronunciationrequest).subscribe(res => {
-      console.log(res);
+      
       this.saveCustomPronunciationresponse = res;
       jQuery("#exampleModalCenter").modal('hide');
       this.showloader = true;
@@ -151,9 +148,7 @@ export class MypronunciationComponent implements OnInit {
         deletingRecordEmployeeId: this.pronunciationUserDetailresponse.employeeId,
         loggedinUserId: this.loggedinUserID
       }
-      console.log(this.deleterpronunciationrrequest);
       this.pronunciationservice.deletePronunciation(this.deleterpronunciationrrequest).subscribe(res => {
-        console.log(res);
         this.deleterpronunciationresponse = res;
 
       });
@@ -219,12 +214,11 @@ export class MypronunciationComponent implements OnInit {
   }
 
   ViewprocessRecording(byte: any) {
-    console.log(byte);
     let binary = this.convertDataURIToBinary(byte);
     let blob = new Blob([binary], { type: 'audio/wav' });
     let blobUrl = URL.createObjectURL(blob);
     this.audioSource = blobUrl;
-    console.log(this.audioSource);
+
   }
 
 

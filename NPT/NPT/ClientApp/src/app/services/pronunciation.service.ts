@@ -17,7 +17,6 @@ export class Pronunciationservice {
     GetStandardPronunciation(param: standardpronunciationRequestModel) {
         var httpOptions = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
         let apiurl = this.url + 'api/pronunciation/GetStandardPronunciation/v1'
-        console.log(apiurl);
         return this.httpClient.post<any>(apiurl, param, httpOptions).subscribe({
             next: data => {
                 console.log(data);

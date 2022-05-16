@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using NPT.DataAccess.Repository;
 using NPT.Model.RequestModel;
+using Microsoft.Extensions.Configuration;
 namespace NPT.Controllers
 {
 
@@ -13,6 +11,12 @@ namespace NPT.Controllers
     {
         SearchRepository repo = new SearchRepository();
 
+        private IConfiguration Configuration;
+
+        public SearchController(IConfiguration _Configuration)
+        {
+            Configuration = _Configuration;
+        }
 
         [Route("api/search/SearchPronunciationDetails/v1")]
         [HttpPost]
@@ -20,7 +24,8 @@ namespace NPT.Controllers
         {
             try
             {
-                return Ok(await repo.SearchPronunciationDetails(request));
+                string Conn = Configuration.GetConnectionString("NPTContextConnection");
+                return Ok(await repo.SearchPronunciationDetails(request, Conn));
             }
             catch (Exception)
             {

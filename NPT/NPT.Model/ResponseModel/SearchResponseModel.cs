@@ -19,5 +19,10 @@ namespace NPT.Model.ResponseModel
         public DateTime? LastUpdatedDate { get; set; }
         public bool IsAdmin { get; set; }
         //public byte[] CustomPronunciation { get; set; }
+        public bool? OverrideStandardPronunciation { get; set; }
+        public string Comments { get; set; }
+        public string Createdby { get; set; }
+
+        public string lanid { get; set; }
     }
 }

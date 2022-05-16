@@ -45,6 +45,12 @@ namespace NPT.DataAccess.Repository
                     response.Managername = actualData.Tables[0].Rows[0]["rep_to_mgr_name"].ToString();
                     response.IsAdmin = (Boolean)actualData.Tables[0].Rows[0]["isadmin"];
                     response.IsCustomPronunciationAvailable = false;
+                    response.lanid = actualData.Tables[0].Rows[0]["elid"].ToString();
+                    if (!(actualData.Tables[0].Rows[0]["updated_date"] is DBNull))
+                        response.LastUpdatedDate = Convert.ToDateTime(actualData.Tables[0].Rows[0]["updated_date"]);
+                    response.Createdby = actualData.Tables[0].Rows[0]["createdby"].ToString();
+                    response.Comments = actualData.Tables[0].Rows[0]["createdby"].ToString();
+                    response.IsCustomPronunciationAvailable = (string.IsNullOrEmpty(Convert.ToString(actualData.Tables[0].Rows[0]["pronunciation"]))) ? false : true;
                     comm.Dispose();
 
 

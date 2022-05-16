@@ -12,7 +12,7 @@ export interface pronunciationUserDetailResponseModel {
     phone: string,
     managername: string,
     isAdmin: boolean,
-    iscustomPronunciationAvailable: boolean,
+    isCustomPronunciationAvailable: boolean,
     customPronunciation: string,
     lastUpdatedDate: Date,
     createdby:string,

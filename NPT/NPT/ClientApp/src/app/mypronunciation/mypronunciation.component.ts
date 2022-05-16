@@ -5,7 +5,6 @@ import { Pronunciationservice } from 'src/app/services/pronunciation.service';
 import { standardpronunciationRequestModel } from 'src/app/models/standardpronunciationmodel';
 import { pronunciationUserDetailRequestModel, pronunciationUserDetailResponseModel, saveCustomPronunciationRequestModel, saveCustomPronunciationResponseModel } from 'src/app/models/pronunciationuserDetailsmodel'
 import { deleterpronunciationRequestmodel, deleterpronunciationResponseModel } from 'src/app/models/deletepronunciationmodel';
-import { GlobalFunctions } from '../Global';
 declare var jQuery: any;
 
 @Component({
@@ -64,8 +63,8 @@ export class MypronunciationComponent implements OnInit {
       phone: '',
       managername: '',
       isAdmin: false,
-      iscustomPronunciationAvailable: false,
-      customPronunciation:'',
+      isCustomPronunciationAvailable: false,
+      customPronunciation: '',
       lastUpdatedDate: null,
       createdby: '',
       comments: '',
@@ -102,11 +101,12 @@ export class MypronunciationComponent implements OnInit {
     this.pronunciationservice.GetProunciationUserDetails(this.pronunciationUserDetailrequest).subscribe(res => {
       console.log(res);
       this.pronunciationUserDetailresponse = res;
-      if(this.pronunciationUserDetailresponse.iscustomPronunciationAvailable)
-      {
-        this.audioSource=GlobalFunctions.processRecording(this.pronunciationUserDetailresponse.customPronunciation);
-      }
+      console.log(this.pronunciationUserDetailresponse);
       this.showloader = false;
+      if (this.pronunciationUserDetailresponse.isCustomPronunciationAvailable) {
+        this.ViewprocessRecording(this.pronunciationUserDetailresponse.customPronunciation);
+      }
+      
     });
   }
   getStandardPronunciation() {
@@ -140,6 +140,9 @@ export class MypronunciationComponent implements OnInit {
       console.log(res);
       this.saveCustomPronunciationresponse = res;
       jQuery("#exampleModalCenter").modal('hide');
+      this.showloader=true;
+      this.getProunciationUserDetails();
+      
     });
   }
 
@@ -214,5 +217,26 @@ export class MypronunciationComponent implements OnInit {
   */
   errorCallback(error: any) {
     this.error = 'Can not play audio in your browser';
+  }
+
+  ViewprocessRecording(byte: any) {
+    console.log(byte);
+    let binary = this.convertDataURIToBinary(byte);
+    let blob = new Blob([binary], { type: 'audio/wav' });
+    let blobUrl = URL.createObjectURL(blob);
+    this.audioSource = blobUrl;
+    console.log(this.audioSource);
+  }
+
+
+  convertDataURIToBinary(dataURI: any) {
+    var raw = window.atob(dataURI);
+    var rawLength = raw.length;
+    var array = new Uint8Array(new ArrayBuffer(rawLength));
+
+    for (let i = 0; i < rawLength; i++) {
+      array[i] = raw.charCodeAt(i);
+    }
+    return array;
   }
 }

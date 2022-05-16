@@ -4,7 +4,6 @@ import { Pronunciationservice } from 'src/app/services/pronunciation.service';
 import { searchRequestModel, searchResponseModel } from 'src/app/models/searchmodel'
 import { GlobalFunctions } from '../Global';
 import { getpronunciationRequestModel, getpronunciationResponseModel } from 'src/app/models/getpronunciationmodel';
-
 import { DomSanitizer } from '@angular/platform-browser';
 
 
@@ -62,12 +61,33 @@ export class SearchComponent implements OnInit {
       if (res != null && res != undefined) {
         console.log(res);
         this.getpronunciationresponse = res;
-        this.audioSource=GlobalFunctions.processRecording(this.getpronunciationresponse.custompronunciation);
+        this.processRecording(this.getpronunciationresponse.custompronunciation);
       }
     });
   }
   
-  
+  processRecording(byte: any) {
+   
+    let binary = this.convertDataURIToBinary(byte);
+    console.log(binary);
+    let blob = new Blob([binary], { type: 'audio/wav' });
+    let blobUrl = URL.createObjectURL(blob);
+    this.audioSource = blobUrl;
+    console.log(this.audioSource);
+  }
+
+
+  convertDataURIToBinary(dataURI:any) {
+    var raw = window.atob(dataURI);
+    var rawLength = raw.length;
+    var array = new Uint8Array(new ArrayBuffer(rawLength));
+
+    for (let i = 0; i < rawLength; i++) {
+      array[i] = raw.charCodeAt(i);
+    }
+    return array;
+  }
+
   initvariables() {
 
     this.searchrequest =

@@ -91,7 +91,7 @@
     </div>
     <br />
     
-    <ng-container *ngIf="pronunciationUserDetailresponse.iscustomPronunciationAvailable">
+    <ng-container *ngIf="pronunciationUserDetailresponse.isCustomPronunciationAvailable">
         <div class="card">
             <div class="card-header" (click)="ispronunciationHidden=!ispronunciationHidden">
                 <i class="fs-4 bi bi-mic"></i><span>Custom Pronunciation</span>
@@ -120,7 +120,7 @@
                         <div class="form-check form-check-inline">
                             &nbsp;&nbsp; <input class="form-check-input" type="checkbox"
                                 name="OverrideStandardPronunciationview" disabled="true"
-                                id="OverrideStandardPronunciationview" value="true" [(ngModel)]="selectedvoicespeed">
+                                id="OverrideStandardPronunciationview" [checked]="pronunciationUserDetailresponse.overrideStandardPronunciation">
                         </div>
                     </div>
                     <div class="col-4">
@@ -128,7 +128,7 @@
                             Created By:
                         </label>
                         <label class="control-label">
-
+                            {{this.pronunciationUserDetailresponse.createdby}}
                         </label>
                     </div>
                     <div class="col-4">
@@ -136,6 +136,7 @@
                             Created On:
                         </label>
                         <label class="control-label">
+                            {{this.pronunciationUserDetailresponse.lastUpdatedDate}}
                         </label>
                     </div>
                 </div>
@@ -147,6 +148,7 @@
                             Comments :
                         </label>
                         <label class="control-label">
+                            {{this.pronunciationUserDetailresponse.comments}}
                         </label>
                     </div>
                 </div>
@@ -221,7 +223,7 @@
                         Pronunciation</button>
                 </div>
             </div>
-            <div class="form-group row" *ngIf="!pronunciationUserDetailresponse.iscustomPronunciationAvailable">
+            <div class="form-group row" *ngIf="!pronunciationUserDetailresponse.isCustomPronunciationAvailable">
                 <div class="col-sm-10">
                     <label class="control-label"><b>
                             Not Happy with the Standard Pronunciation,<a data-toggle="modal"

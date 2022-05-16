@@ -166,7 +166,7 @@ namespace NPT.DataAccess.Repository
                 comm.Connection = conn;
                 comm.CommandType = CommandType.Text;
 
-                comm.CommandText = RepoConstants.SaveCustomPronunciation + "('" + request.LoggedinUserId + "','','','DELETE', '','' )";
+                comm.CommandText = RepoConstants.SaveCustomPronunciation + "('" + request.DeletingRecordEmployeeId + "','','','DELETE', '','' )";
                 comm.ExecuteNonQuery();
             }
             catch (Exception ex)

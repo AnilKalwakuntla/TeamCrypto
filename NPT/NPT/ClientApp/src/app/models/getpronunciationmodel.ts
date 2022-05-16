@@ -9,5 +9,6 @@ export interface getpronunciationRequestModel {
 };
 export interface getpronunciationResponseModel {
     success: boolean,
-    custompronunciation: string
+    custompronunciation: string,
+    comments:string
 };

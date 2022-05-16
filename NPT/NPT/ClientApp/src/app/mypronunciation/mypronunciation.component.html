@@ -32,33 +32,33 @@
             <div class="form-group row">
                 <div class="col-4">
                     <label class="control-label">
-                        First Name:
-                    </label>
-                    <label class="control-label">
-                        {{ pronunciationUserDetailresponse.firstname}}
-                    </label>
-                </div>
-                <div class="col-4">
-                    <label class="control-label">
-                        Last Name:
-                    </label>
-                    <label class="control-label">
-                        {{ pronunciationUserDetailresponse.lastname}}
-                    </label>
-                </div>
-                <div class="col-4">
-                    <label class="control-label">
                         Full Name:
                     </label>
                     <label class="control-label">
                         {{ pronunciationUserDetailresponse.fullname}}
                     </label>
                 </div>
+                <div class="col-4">
+                    <label class="control-label">
+                        Employee Lan ID:
+                    </label>
+                    <label class="control-label">
+                        {{ pronunciationUserDetailresponse.lanID}}
+                    </label>
+                </div>
+                <div class="col-4">
+                    <label class="control-label">
+                        Phone:
+                    </label>
+                    <label class="control-label">
+                        {{ pronunciationUserDetailresponse.phone}}
+                    </label>
+                </div>
             </div>
             <div class="form-group row">
                 <div class="col-4">
                     <label class="control-label">
-                     <b>   Is Admin ? :</b>
+                        <b> Is Admin ? :</b>
                     </label>
                     <label class="control-label">
                         <input type="radio" id="admintrue" [value]="true" disabled="true"
@@ -77,20 +77,11 @@
                         {{ pronunciationUserDetailresponse.managername}}
                     </label>
                 </div>
-                
-                <div class="col-4">
-                    <label class="control-label">
-                        Phone:
-                    </label>
-                    <label class="control-label">
-                        {{ pronunciationUserDetailresponse.phone}}
-                    </label>
-                </div>
             </div>
         </div>
     </div>
     <br />
-    
+
     <ng-container *ngIf="pronunciationUserDetailresponse.isCustomPronunciationAvailable">
         <div class="card">
             <div class="card-header" (click)="ispronunciationHidden=!ispronunciationHidden">
@@ -120,7 +111,8 @@
                         <div class="form-check form-check-inline">
                             &nbsp;&nbsp; <input class="form-check-input" type="checkbox"
                                 name="OverrideStandardPronunciationview" disabled="true"
-                                id="OverrideStandardPronunciationview" [checked]="pronunciationUserDetailresponse.overrideStandardPronunciation">
+                                id="OverrideStandardPronunciationview"
+                                [checked]="pronunciationUserDetailresponse.overrideStandardPronunciation">
                         </div>
                     </div>
                     <div class="col-4">
@@ -154,9 +146,10 @@
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-info" style="cursor: pointer;" (click)="editPronunciation()">Edit</button>
-                    <button class="btn btn-danger" style="cursor: pointer;" (click)="deletePronunciation()">Delete</button>
+                    <button class="btn btn-danger" style="cursor: pointer;"
+                        (click)="deletePronunciation()">Delete</button>
                 </div>
-                
+
             </div>
         </div>
     </ng-container>

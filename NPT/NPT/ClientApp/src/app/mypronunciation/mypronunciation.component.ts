@@ -46,7 +46,6 @@ export class MypronunciationComponent implements OnInit {
   ngOnInit() {
 
     this.loggedinUserID = sessionStorage.getItem('loggedUser');
-    //this.loggedinUserID = "karthicknexus@wfhackathon2022.onmicrosoft.com";
     this.showloader = true;
     this.initvariables();
     this.getProunciationUserDetails();
@@ -68,7 +67,8 @@ export class MypronunciationComponent implements OnInit {
       lastUpdatedDate: null,
       createdby: '',
       comments: '',
-      overrideStandardPronunciation: true
+      overrideStandardPronunciation: true,
+      lanID:''
     }
     this.saveCustomPronunciationrequest =
     {
@@ -86,7 +86,6 @@ export class MypronunciationComponent implements OnInit {
       customPronunciation: '',
       overrideStandardPronunciation: null,
       comments: '',
-
     }
   }
   public onOverrideStandardPronunciationoptChanged(val: boolean) {
@@ -99,14 +98,14 @@ export class MypronunciationComponent implements OnInit {
       loggedinId: this.loggedinUserID
     }
     this.pronunciationservice.GetProunciationUserDetails(this.pronunciationUserDetailrequest).subscribe(res => {
-      console.log(res);
       this.pronunciationUserDetailresponse = res;
+      sessionStorage.setItem('isadmin', (this.pronunciationUserDetailresponse.isAdmin) ? "true" : "false");
       console.log(this.pronunciationUserDetailresponse);
       this.showloader = false;
       if (this.pronunciationUserDetailresponse.isCustomPronunciationAvailable) {
         this.ViewprocessRecording(this.pronunciationUserDetailresponse.customPronunciation);
       }
-      
+
     });
   }
   getStandardPronunciation() {
@@ -140,9 +139,9 @@ export class MypronunciationComponent implements OnInit {
       console.log(res);
       this.saveCustomPronunciationresponse = res;
       jQuery("#exampleModalCenter").modal('hide');
-      this.showloader=true;
+      this.showloader = true;
       this.getProunciationUserDetails();
-      
+
     });
   }
 

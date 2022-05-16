@@ -17,7 +17,8 @@ export interface pronunciationUserDetailResponseModel {
     lastUpdatedDate: Date,
     createdby:string,
     overrideStandardPronunciation:boolean,
-    comments:string;
+    comments:string,
+    lanID:string
 };
 
 export interface saveCustomPronunciationRequestModel {

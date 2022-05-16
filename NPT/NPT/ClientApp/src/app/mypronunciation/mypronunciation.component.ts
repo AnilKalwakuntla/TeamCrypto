@@ -5,7 +5,7 @@ import { Pronunciationservice } from 'src/app/services/pronunciation.service';
 import { standardpronunciationRequestModel } from 'src/app/models/standardpronunciationmodel';
 import { pronunciationUserDetailRequestModel, pronunciationUserDetailResponseModel, saveCustomPronunciationRequestModel, saveCustomPronunciationResponseModel } from 'src/app/models/pronunciationuserDetailsmodel'
 import { deleterpronunciationRequestmodel, deleterpronunciationResponseModel } from 'src/app/models/deletepronunciationmodel';
-
+import { GlobalFunctions } from '../Global';
 declare var jQuery: any;
 
 @Component({
@@ -41,6 +41,7 @@ export class MypronunciationComponent implements OnInit {
   txtcomments: string = '';
   OverrideStandardPronunciation: boolean = true;
   showloader: boolean = false;
+  audioSource: string = '';
   constructor(private domSanitizer: DomSanitizer, private pronunciationservice: Pronunciationservice) { }
 
   ngOnInit() {
@@ -64,7 +65,11 @@ export class MypronunciationComponent implements OnInit {
       managername: '',
       isAdmin: false,
       iscustomPronunciationAvailable: false,
-      lastUpdatedDate: null
+      customPronunciation:'',
+      lastUpdatedDate: null,
+      createdby: '',
+      comments: '',
+      overrideStandardPronunciation: true
     }
     this.saveCustomPronunciationrequest =
     {
@@ -97,6 +102,10 @@ export class MypronunciationComponent implements OnInit {
     this.pronunciationservice.GetProunciationUserDetails(this.pronunciationUserDetailrequest).subscribe(res => {
       console.log(res);
       this.pronunciationUserDetailresponse = res;
+      if(this.pronunciationUserDetailresponse.iscustomPronunciationAvailable)
+      {
+        this.audioSource=GlobalFunctions.processRecording(this.pronunciationUserDetailresponse.customPronunciation);
+      }
       this.showloader = false;
     });
   }
@@ -111,7 +120,12 @@ export class MypronunciationComponent implements OnInit {
     console.log(this.standardpronunciationrequest);
     this.standardpronunciation = this.pronunciationservice.GetStandardPronunciation(this.standardpronunciationrequest);
   }
-
+  editPronunciation() {
+    this.txtcomments = this.pronunciationUserDetailresponse.comments;
+    this.OverrideStandardPronunciation = this.pronunciationUserDetailresponse.overrideStandardPronunciation;
+    this.saveCustomPronunciationrequest.isupdate = true;
+    jQuery("#exampleModalCenter").modal('show');
+  }
   saveProunciationUserDetails() {
     /* AssignValues */
 

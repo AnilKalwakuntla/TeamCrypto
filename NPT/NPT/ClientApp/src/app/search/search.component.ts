@@ -62,39 +62,12 @@ export class SearchComponent implements OnInit {
       if (res != null && res != undefined) {
         console.log(res);
         this.getpronunciationresponse = res;
-        this.processRecording(this.getpronunciationresponse.custompronunciation);
+        this.audioSource=GlobalFunctions.processRecording(this.getpronunciationresponse.custompronunciation);
       }
     });
-    //this.processRecording();
-
   }
   
-  processRecording(byte: any) {
-   
-    let binary = this.convertDataURIToBinary(byte);
-    console.log(binary);
-    let blob = new Blob([binary], { type: 'audio/wav' });
-    let blobUrl = URL.createObjectURL(blob);
-    this.audioSource = blobUrl;
-    console.log(this.audioSource);
-  }
-
-  //Convert a base64 string into a binary Uint8 Array
-  BASE64_MARKER = ';base64,';
-
-  convertDataURIToBinary(dataURI:any) {
-    // var base64Index = dataURI.indexOf(this.BASE64_MARKER) + this.BASE64_MARKER.length;
-    // var base64 = dataURI.substring(base64Index);
-    var raw = window.atob(dataURI);
-    var rawLength = raw.length;
-    var array = new Uint8Array(new ArrayBuffer(rawLength));
-
-    for (let i = 0; i < rawLength; i++) {
-      array[i] = raw.charCodeAt(i);
-    }
-    return array;
-  }
-
+  
   initvariables() {
 
     this.searchrequest =

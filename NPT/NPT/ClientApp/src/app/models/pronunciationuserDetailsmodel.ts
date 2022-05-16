@@ -13,7 +13,11 @@ export interface pronunciationUserDetailResponseModel {
     managername: string,
     isAdmin: boolean,
     iscustomPronunciationAvailable: boolean,
-    lastUpdatedDate: Date
+    customPronunciation: string,
+    lastUpdatedDate: Date,
+    createdby:string,
+    overrideStandardPronunciation:boolean,
+    comments:string;
 };
 
 export interface saveCustomPronunciationRequestModel {

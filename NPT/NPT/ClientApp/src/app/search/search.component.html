@@ -17,7 +17,7 @@
     </div>
 </div>
 <br />
-<ng-container >
+<ng-container *ngIf="showSearchresult">
     <div class="card">
         <div class="card-header" (click)="issearchInfoHidden=!issearchInfoHidden">
             <i class="bi bi-people"></i><span>&nbsp;&nbsp;Search Results</span>

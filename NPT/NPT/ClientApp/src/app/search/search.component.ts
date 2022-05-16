@@ -4,9 +4,9 @@ import { Pronunciationservice } from 'src/app/services/pronunciation.service';
 import { searchRequestModel, searchResponseModel } from 'src/app/models/searchmodel'
 import { GlobalFunctions } from '../Global';
 import { getpronunciationRequestModel, getpronunciationResponseModel } from 'src/app/models/getpronunciationmodel';
-import * as RecordRTC from 'recordrtc';
+
 import { DomSanitizer } from '@angular/platform-browser';
-import { variable } from '@angular/compiler/src/output/output_ast';
+
 
 @Component({
   selector: 'app-search',
